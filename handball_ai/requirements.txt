@@ -1,0 +1,16 @@
+# Backend Framework
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+psycopg2-binary
+
+# AI / Computer Vision
+torch
+torchvision
+ultralytics
+opencv-python-headless
+numpy
+scipy
+
+# Testing
+pytest
