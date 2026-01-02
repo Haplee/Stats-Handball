@@ -1,6 +1,0 @@
-body { font-family: sans-serif; margin: 2em; }
-main { max-width: 800px; margin: auto; }
-section { border: 1px solid #ccc; padding: 1em; margin-bottom: 1em; border-radius: 5px; }
-h1, h2 { color: #333; }
-#status-container { font-style: italic; color: #555; }
-#results-container { white-space: pre-wrap; background: #f4f4f4; padding: 1em; }
