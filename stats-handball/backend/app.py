@@ -3,15 +3,15 @@ import os
 import time
 from multiprocessing import Process
 from flask import Flask, send_from_directory
-from .database.db import db
-from .database.models import Video
-from .routes.video_routes import video_bp
-from .routes.stats_routes import stats_bp
-from ..ai.detection.yolo_detector import YoloDetector
-from ..ai.tracking.tracker import ObjectTracker
-from ..ai.actions.action_recognition import recognize_actions
-from ..ai.stats.stats_engine import StatsEngine
-from ..utils.video_utils import process_video
+from backend.database.db import db
+from backend.database.models import Video
+from backend.routes.video_routes import video_bp
+from backend.routes.stats_routes import stats_bp
+from ai.detection.yolo_detector import YoloDetector
+from ai.tracking.tracker import ObjectTracker
+from ai.actions.action_recognition import recognize_actions
+from ai.stats.stats_engine import StatsEngine
+from utils.video_utils import process_video
 
 
 def video_processing_worker(app):
@@ -58,7 +58,7 @@ def video_processing_worker(app):
 
 
 def create_app(test_config=None):
-    app = Flask(__name__, static_folder='../frontend', static_url_path='/')
+    app = Flask(__name__, static_folder='../frontend/src', static_url_path='/')
 
     db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'instance')
     db_uri = 'sqlite:///' + os.path.join(db_path, 'handball_ai.db')
@@ -79,10 +79,11 @@ def create_app(test_config=None):
 
     @app.route('/')
     def serve_index():
-        return send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(os.path.join(app.static_folder, 'views'), 'index.html')
 
     @app.route('/<path:path>')
     def serve_static(path):
+        # Serve assets, services, etc.
         return send_from_directory(app.static_folder, path)
 
     with app.app_context():
