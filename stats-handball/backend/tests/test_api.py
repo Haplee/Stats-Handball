@@ -1,7 +1,13 @@
 # handball_ai/tests/test_api.py
 import os
 import pytest
-from handball_ai.backend.app import create_app
+import sys
+import os
+
+# Add the project root `stats-handball` to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from backend.app import create_app
 
 @pytest.fixture
 def app():

@@ -1,0 +1,6 @@
+
+# Ignorar archivos generados
+__pycache__/
+*.pyc
+flask_output.log
+instance/
