@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Landing />
-    <About />
-    <Stats />
-    <Technologies />
+    <LandingSection />
+    <AboutSection />
+    <StatsDisplay />
+    <TechStack />
   </div>
 </template>
 
 <script setup>
-import Landing from '@/components/Landing.vue';
-import About from '@/components/About.vue';
-import Stats from '@/components/Stats.vue';
-import Technologies from '@/components/Technologies.vue';
+import LandingSection from '@/components/LandingSection.vue'
+import AboutSection from '@/components/AboutSection.vue'
+import StatsDisplay from '@/components/StatsDisplay.vue'
+import TechStack from '@/components/TechStack.vue'
 </script>

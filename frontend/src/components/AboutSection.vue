@@ -2,7 +2,9 @@
   <section class="about">
     <h2>What does the application do?</h2>
     <p>
-      Stats-Handball is an AI-powered platform that automatically analyzes handball match videos to extract detailed statistics. It identifies players, tracks their movements, and records key actions like goals and shots.
+      Stats-Handball is an AI-powered platform that automatically analyzes handball match videos to
+      extract detailed statistics. It identifies players, tracks their movements, and records key
+      actions like goals and shots.
     </p>
     <h3>Target Audience</h3>
     <div class="audience-cards">
@@ -22,8 +24,7 @@
   </section>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .about {
@@ -64,7 +65,7 @@
   background: #ffffff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   max-width: 280px;
   flex: 1;
 }
