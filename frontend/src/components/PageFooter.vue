@@ -2,22 +2,21 @@
   <footer class="site-footer">
     <div class="footer-content">
       <p>
-        <a href="https://github.com/Haplee/Stats-Handball" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://github.com/Haplee/Stats-Handball"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           GitHub Repository
         </a>
       </p>
-      <p>
-        Developed by Haplee
-      </p>
-      <p>
-        &copy; 2024 Stats-Handball. All rights reserved.
-      </p>
+      <p>Developed by Haplee</p>
+      <p>&copy; 2024 Stats-Handball. All rights reserved.</p>
     </div>
   </footer>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .site-footer {

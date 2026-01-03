@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import Footer from '@/components/Footer.vue'
+import PageFooter from '@/components/PageFooter.vue'
 </script>
 
 <template>
@@ -16,13 +16,13 @@ import Footer from '@/components/Footer.vue'
     <RouterView />
   </main>
 
-  <Footer />
+  <PageFooter />
 </template>
 
 <style scoped>
 header {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -40,7 +40,9 @@ nav a {
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 nav a:hover {
