@@ -1,6 +1,11 @@
+# Vercel
+.vercel
 
-# Ignorar archivos generados
-__pycache__/
-*.pyc
-flask_output.log
-instance/
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.vscode
+.ideavercel.log
