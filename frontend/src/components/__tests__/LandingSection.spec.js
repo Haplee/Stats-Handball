@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import Landing from '../Landing.vue'
+import LandingSection from '../LandingSection.vue'
 
-describe('Landing.vue', () => {
+describe('LandingSection.vue', () => {
   it('renders the main heading', () => {
-    const wrapper = mount(Landing)
+    const wrapper = mount(LandingSection)
     expect(wrapper.find('h1').text()).toBe('Stats-Handball')
   })
 })
