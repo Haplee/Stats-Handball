@@ -1,0 +1,7 @@
+celery
+redis
+opencv-python-headless
+numpy
+# Placeholder for a deep learning framework
+# torch
+# torchvision

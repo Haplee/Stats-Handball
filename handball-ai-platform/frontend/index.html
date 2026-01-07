@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handball AI Platform</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0 auto; max-width: 800px; padding: 2em; background-color: #f4f4f9; }
+        h1, h2 { color: #333; }
+        .container { background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .upload-section { margin-bottom: 2em; }
+        #videoList { list-style: none; padding: 0; }
+        #videoList li { background: #eee; margin-bottom: 0.5em; padding: 1em; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .status { font-weight: bold; }
+        .status-completed { color: green; }
+        .status-processing { color: orange; }
+        .status-pending { color: grey; }
+        .progress-bar { width: 100px; height: 20px; background-color: #ddd; border-radius: 10px; overflow: hidden; }
+        .progress { width: 0; height: 100%; background-color: #4caf50; transition: width 0.4s ease; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plataforma de Análisis de Balonmano</h1>
+
+        <div class="upload-section">
+            <h2>Subir Nuevo Vídeo</h2>
+            <form id="uploadForm">
+                <input type="file" id="videoFile" name="file" accept="video/*" required>
+                <button type="submit">Subir y Procesar</button>
+            </form>
+            <p id="uploadStatus"></p>
+        </div>
+
+        <div class="videos-section">
+            <h2>Vídeos Procesados</h2>
+            <ul id="videoList">
+                <!-- Los vídeos se cargarán aquí dinámicamente -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
