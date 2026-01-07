@@ -43,6 +43,7 @@ const Header = () => {
             <li><Link href="/results" className="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded" onClick={() => setIsMenuOpen(false)}>Resultados</Link></li>
             <li><Link href="/blog" className="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded" onClick={() => setIsMenuOpen(false)}>Blog</Link></li>
             <li><Link href="/tfg" className="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded" onClick={() => setIsMenuOpen(false)}>TFG</Link></li>
+            <li><Link href="/contact" className="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700 rounded" onClick={() => setIsMenuOpen(false)}>Contacto</Link></li>
           </ul>
         </nav>
       </div>
