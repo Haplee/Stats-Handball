@@ -1,60 +1,74 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 
-const containerVariants = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+const itemVariants: any = {
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: "easeInOut",
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-const HeroAnimated = () => {
+export default function HeroAnimated() {
   return (
-    <motion.section
-      className="text-center py-16"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.h1 className="text-4xl font-bold mb-4" variants={itemVariants}>
-        Análisis de Partidos de Balonmano con Inteligencia Artificial
-      </motion.h1>
-      <motion.p
-        className="text-lg text-gray-600 dark:text-gray-300 mb-8"
-        variants={itemVariants}
+    <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <motion.div
+        className="z-10 max-w-4xl px-6 text-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
-        Un proyecto de Fin de Grado de ASIR para automatizar la extracción de estadísticas y mapas de calor en partidos de balonmano.
-      </motion.p>
-      <motion.div variants={itemVariants}>
-        <Link href="/progress">
-          <motion.span
-            className="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg inline-block"
-            whileHover={{ scale: 1.1, backgroundColor: "#3B82F6" }} // Equivalent to hover:bg-blue-600
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            Ver Progreso del Proyecto
-          </motion.span>
-        </Link>
-      </motion.div>
-    </motion.section>
-  );
-};
+        <motion.h1
+          className="mb-6 text-4xl font-extrabold tracking-tight text-white md:text-6xl"
+          variants={itemVariants}
+        >
+          Análisis de Partidos de Balonmano con Inteligencia Artificial
+        </motion.h1>
 
-export default HeroAnimated;
+        <motion.p
+          className="mb-8 text-lg text-slate-300 md:text-xl"
+          variants={itemVariants}
+        >
+          Web de seguimiento del TFG de ASIR centrado en análisis automático del
+          rendimiento deportivo mediante visión artificial.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          variants={itemVariants}
+        >
+          <a
+            href="/progress"
+            className="px-6 py-3 text-sm font-semibold text-white transition rounded-xl bg-indigo-600 hover:bg-indigo-500"
+          >
+            Ver progreso
+          </a>
+          <a
+            href="/contact"
+            className="px-6 py-3 text-sm font-semibold text-white transition border rounded-xl border-white/20 hover:bg-white/10"
+          >
+            Contacto
+          </a>
+        </motion.div>
+      </motion.div>
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.15),transparent_60%)]" />
+    </section>
+  );
+}
