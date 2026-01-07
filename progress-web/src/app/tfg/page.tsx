@@ -1,58 +1,77 @@
-// src/app/tfg/page.tsx
-import Card from '@/components/Card';
+import AnimatedSection from "@/components/AnimatedSection";
+import MotionCard from "@/components/MotionCard";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "El TFG - TFG Análisis de Balonmano con IA",
+  description: "Documentación académica y técnica del Trabajo de Fin de Grado.",
+};
+
 
 export default function TfgPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-12">Documentación del TFG</h1>
+      <AnimatedSection>
+        <h1 className="text-4xl font-bold text-center mb-12">Documentación del TFG</h1>
+      </AnimatedSection>
 
       <div className="max-w-3xl mx-auto">
-        <Card title="Sobre el Proyecto">
-          <div className="space-y-4 text-gray-700 dark:text-gray-300">
-            <p>
-              Este proyecto se ha desarrollado como parte del Trabajo de Fin de Grado (TFG) del ciclo formativo de Grado Superior en Administración de Sistemas Informáticos en Red (ASIR).
-            </p>
-            <p>
-              El objetivo principal es diseñar, implementar y desplegar un sistema basado en inteligencia artificial capaz de analizar partidos de balonmano a partir de grabaciones de vídeo. El sistema extrae automáticamente estadísticas, posiciones de jugadores y genera mapas de calor, proporcionando herramientas valiosas para entrenadores y analistas deportivos.
-            </p>
-            <h3 className="font-bold text-lg mt-6">Objetivos Clave:</h3>
-            <ul className="list-disc list-inside ml-4">
-              <li>Automatizar el análisis de partidos de balonmano.</li>
-              <li>Proporcionar una interfaz web para la gestión y visualización de datos.</li>
-              <li>Utilizar una arquitectura de microservicios escalable y robusta.</li>
-              <li>Desplegar el sistema en un entorno cloud (Vercel) para su accesibilidad.</li>
-            </ul>
-          </div>
-        </Card>
+        <AnimatedSection delay={0.2}>
+          <MotionCard className="bg-gray-800 p-8 rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">Sobre el Proyecto</h2>
+            <div className="space-y-4 text-gray-300">
+              <p>
+                Este proyecto constituye el Trabajo de Fin de Grado (TFG) para el ciclo de **Administración de Sistemas Informáticos en Red (ASIR)**. Su propósito es aplicar los conocimientos en sistemas, redes y desarrollo para crear una solución tecnológica completa y funcional.
+              </p>
+              <p>
+                El núcleo del TFG es el diseño e implementación de un sistema de **análisis de vídeo deportivo mediante Inteligencia Artificial**. El sistema automatiza la extracción de estadísticas y mapas de calor de partidos de balonmano, ofreciendo una herramienta innovadora para el análisis táctico.
+              </p>
+              <h3 className="font-bold text-lg mt-6">Decisiones Técnicas Clave:</h3>
+              <ul className="list-disc list-inside ml-4 space-y-2">
+                <li>
+                  **Arquitectura de Microservicios:** Elegida por su flexibilidad, escalabilidad y por facilitar el despliegue independiente de los componentes (frontend, backend, worker).
+                </li>
+                <li>
+                  **Procesamiento Asíncrono:** La API delega el análisis de vídeo (una tarea pesada) a un worker de Celery. Esto asegura que la interfaz de usuario permanezca ágil y responsiva.
+                </li>
+                <li>
+                  **Despliegue Híbrido:** Se utiliza Vercel para el frontend de Next.js por su integración con GitHub y su optimización para la entrega de contenido estático, mientras que los servicios de backend se despliegan en un entorno de contenedores.
+                </li>
+              </ul>
+            </div>
+          </MotionCard>
+        </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 gap-8 mt-12">
-          <Card title="Memoria del TFG">
-            <p className="mb-4">
-              Accede a la documentación completa del proyecto, donde se detallan la planificación, el diseño, la implementación y las conclusiones.
-            </p>
-            <a
-              href="/ruta/a/tu/memoria.pdf" // Cambiar por el enlace real al PDF
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors"
-            >
-              Descargar Memoria (PDF)
-            </a>
-          </Card>
-          <Card title="Repositorio de Código">
-            <p className="mb-4">
-              Explora el código fuente completo del proyecto, incluyendo el backend, el frontend y los scripts de configuración.
-            </p>
-            <a
-              href="https://github.com/your-username/your-repo" // Cambiar por el enlace real al repositorio
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition-colors"
-            >
-              Ver en GitHub
-            </a>
-          </Card>
-        </div>
+        <AnimatedSection delay={0.4}>
+          <div className="grid md:grid-cols-2 gap-8 mt-12">
+            <MotionCard className="bg-gray-800 p-6 rounded-lg">
+              <h3 className="text-xl font-bold mb-2">Memoria del TFG</h3>
+              <p className="mb-4 text-gray-400">
+                Accede a la documentación técnica completa, donde se detallan la planificación, el diseño y las conclusiones del proyecto.
+              </p>
+              <a
+                href="#" // Enlace deshabilitado
+                className="inline-block bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-not-allowed opacity-50"
+              >
+                Próximamente
+              </a>
+            </MotionCard>
+            <MotionCard className="bg-gray-800 p-6 rounded-lg">
+              <h3 className="text-xl font-bold mb-2">Repositorio de Código</h3>
+              <p className="mb-4 text-gray-400">
+                Explora el código fuente del proyecto, incluyendo backend, frontend y la configuración de Docker.
+              </p>
+              <a
+                href="https://github.com/Haplee/TFG-ASIR" // Enlace al repositorio
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition-colors"
+              >
+                Ver en GitHub
+              </a>
+            </MotionCard>
+          </div>
+        </AnimatedSection>
       </div>
     </div>
   );
