@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 py-8 mt-16">
       <div className="container mx-auto text-center">
-        <p>&copy; {new Date().getFullYear()} - Nombre del Alumno</p>
+        <p>&copy; {new Date().getFullYear()} Fran Vidal Mateo</p>
         <p className="mt-2">
           Proyecto Fin de Grado (TFG) - ASIR
         </p>
