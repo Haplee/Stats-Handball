@@ -4,8 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "TFG: Análisis de Partidos de Balonmano con IA",
-  description: "Web de seguimiento y documentación del TFG de ASIR sobre el análisis de partidos de balonmano utilizando inteligencia artificial.",
+  title: "Stats Handball: Análisis de Partidos con IA",
+  description: "Plataforma para el análisis de partidos de balonmano utilizando inteligencia artificial, desarrollada como un TFG de ASIR.",
 };
 
 export default function RootLayout({
@@ -15,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans">
+      <body className="font-sans">
         <Header />
-        <main className="pt-20 container mx-auto px-4">
+        <main className="container mx-auto px-4">
           {children}
         </main>
         <Footer />
