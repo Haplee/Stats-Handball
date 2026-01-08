@@ -1,15 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { ReactNode } from "react";
 
-const AnimatedSection = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
+interface AnimatedSectionProps {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+const AnimatedSection = ({
+  children,
+  delay = 0,
+  className = "",
+}: AnimatedSectionProps) => {
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut",
+        delay: delay,
+      },
+    },
+  };
+
   return (
     <motion.section
-      className="py-12"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+      className={`py-12 ${className}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
     >
       {children}
     </motion.section>

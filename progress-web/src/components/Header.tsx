@@ -87,7 +87,7 @@ const Header = () => {
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white z-[60] relative"
-              aria-label="Toggle menu"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
