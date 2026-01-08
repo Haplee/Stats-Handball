@@ -20,7 +20,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Stats Handball
+          Handball Stats
         </motion.h1>
         <motion.p
           className="text-lg md:text-xl text-gray-300 mb-8"
