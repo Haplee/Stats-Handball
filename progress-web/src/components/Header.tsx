@@ -22,7 +22,7 @@ const Header = () => {
     <header className="bg-gray-900 bg-opacity-90 text-white shadow-lg fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
       <div className="container mx-auto flex justify-between items-center p-4">
         <div className="text-2xl font-bold tracking-wider">
-          <Link href="/">Stats Handball</Link>
+          <Link href="/">Handball Stats</Link>
         </div>
         <div className="md:hidden">
           <button
