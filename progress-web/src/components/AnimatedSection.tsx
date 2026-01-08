@@ -29,7 +29,7 @@ const AnimatedSection = ({
 
   return (
     <motion.section
-      className={className}
+      className={`py-12 ${className}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
