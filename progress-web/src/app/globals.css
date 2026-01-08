@@ -1,22 +1,18 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
+  --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 10, 10, 15;
-  --background-end-rgb: 25, 25, 35;
-  --foreground-rgb: 230, 230, 230;
-}
-
-html {
-  scroll-behavior: smooth;
+  --background-end-rgb: 10, 10, 15;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      rgb(var(--background-start-rgb)),
-      rgb(var(--background-end-rgb))
-    );
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: 100vh;
+  background-color: rgb(var(--background-start-rgb));
+}
+
+html {
+  scroll-behavior: smooth;
 }
