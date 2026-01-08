@@ -1,19 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
 
-interface MotionCardProps {
-  children: ReactNode;
-  className?: string;
-}
-
-const MotionCard = ({ children, className }: MotionCardProps) => {
+const MotionCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
   return (
     <motion.div
       className={className}
-      whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(255, 255, 255, 0.1)" }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ type: "spring", stiffness: 300 }}
     >
       {children}
     </motion.div>

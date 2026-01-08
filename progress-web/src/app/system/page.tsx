@@ -3,7 +3,7 @@ import MotionCard from "@/components/MotionCard";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sistema - TFG Análisis de Balonmano con IA",
+  title: "Sistema - Handball Stats",
   description: "Exploración detallada de la arquitectura de microservicios, el flujo de datos y las tecnologías del proyecto.",
 };
 
