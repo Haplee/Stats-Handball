@@ -17,8 +17,8 @@ const socialLinks = [
     icon: <Instagram size={48} />,
   },
   {
-    name: "Twitter (X)",
-    url: "https://twitter.com/FranVidalMateo",
+    name: "X",
+    url: "https://x.com/FranVidalMateo",
     icon: <Twitter size={48} />,
   },
 ];
