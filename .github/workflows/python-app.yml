@@ -34,15 +34,21 @@ jobs:
       - name: Lint with flake8
         run: |
           echo "🔎 Linting the code..."
-          # Detener si hay errores graves de sintaxis o nombres indefinidos
+          # Mostrar errores graves sin romper el workflow
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
-          # Mostrar advertencias sin fallar el workflow
+          # Mostrar advertencias y estadísticas
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       # 5️⃣ Tests con pytest
       - name: Test with pytest
         run: |
           echo "🧪 Running tests..."
-          # Evitar fallo si no hay tests
-          pytest || echo "⚠️ Algunos tests fallaron o no existen."
+          # Detectar si hay tests
+          TEST_COUNT=$(pytest --collect-only -q | wc -l)
+          if [ "$TEST_COUNT" -eq 0 ]; then
+            echo "⚠️ No tests found, skipping pytest run."
+          else
+            echo "✅ Found $TEST_COUNT test(s), running pytest..."
+            pytest --maxfail=1 --disable-warnings
+          fi
 
