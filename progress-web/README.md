@@ -1,96 +1,73 @@
-# Web de Seguimiento y Documentación del TFG
+# React + TypeScript + Vite
 
-Esta es la web de seguimiento y documentación para el TFG de ASIR sobre el análisis de partidos de balonmano con IA. Ha sido desarrollada con Next.js y Tailwind CSS, y está optimizada para su despliegue en Vercel.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🎯 Objetivo de la Web
+Currently, two official plugins are available:
 
-- **Escaparate Público:** Mostrar el proyecto, sus objetivos y su alcance.
-- **Seguimiento del Progreso:** Documentar los hitos, el avance de las fases y el roadmap del proyecto.
-- **Documentación Técnica:** Explicar la arquitectura del sistema, los servicios y las tecnologías utilizadas.
-- **Central de Enlaces:** Proporcionar acceso a la memoria del TFG y al repositorio de código.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🚀 Cómo Empezar
+## React Compiler
 
-Para trabajar con el proyecto en un entorno de desarrollo local, sigue estos pasos:
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-1.  **Clona el repositorio** (si aún no lo has hecho):
-    ```bash
-    git clone <URL-del-repositorio>
-    cd progress-web
-    ```
+## Expanding the ESLint configuration
 
-2.  **Instala las dependencias**:
-    ```bash
-    npm install
-    ```
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-3.  **Inicia el servidor de desarrollo**:
-    ```bash
-    npm run dev
-    ```
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-4.  Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la web.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## ✏️ Cómo Editar el Contenido
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-La web está diseñada para ser fácilmente personalizable. A continuación se detalla cómo editar cada sección.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### 📄 **Páginas Principales**
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-El contenido de las páginas se encuentra en la carpeta `src/app/`. Cada subcarpeta corresponde a una sección de la web:
-
-- **Home:** `src/app/page.tsx`
-- **Progreso:** `src/app/progress/page.tsx`
-- **Sistema:** `src/app/system/page.tsx`
-- **Resultados:** `src/app/results/page.tsx`
-- **Blog:** `src/app/blog/page.tsx`
-- **TFG:** `src/app/tfg/page.tsx`
-
-Para cambiar el texto o las imágenes, edita el archivo `.tsx` correspondiente.
-
-### ✍️ **Añadir Entradas al Blog (Diario de Desarrollo)**
-
-Actualmente, las entradas del blog están hardcodeadas en `src/app/blog/page.tsx`. Para añadir una nueva entrada:
-
-1.  Abre `src/app/blog/page.tsx`.
-2.  Busca el array `posts`.
-3.  Añade un nuevo objeto al array con la siguiente estructura:
-
-    ```javascript
-    {
-      title: 'Título de tu nueva entrada',
-      date: 'YYYY-MM-DD', // Fecha de publicación
-      content: `
-        <p>Tu contenido aquí, puedes usar etiquetas HTML.</p>
-        <h3 class="font-bold mt-4">Subtítulo</h3>
-        <ul class="list-disc list-inside ml-4">
-          <li>Punto de lista 1.</li>
-          <li>Punto de lista 2.</li>
-        </ul>
-      `
-    }
-    ```
-
-### ⚙️ **Editar Componentes Reutilizables**
-
-Los componentes como el Header, Footer, Cards, etc., se encuentran en `src/components/`.
-
-- **Header:** `src/components/Header.tsx` (para cambiar los enlaces de navegación).
-- **Footer:** `src/components/Footer.tsx` (para actualizar tu nombre, email o enlace a GitHub).
-- **ProgressBar:** `src/app/progress/page.tsx` (edita el array `projectPhases` para cambiar el progreso).
-- **Timeline:** `src/app/progress/page.tsx` (edita el array `timelineEvents` para añadir nuevos hitos).
-
-## 部署 en Vercel
-
-El proyecto está listo para ser desplegado en Vercel con cero configuración.
-
-1.  **Crea un repositorio en GitHub** y sube el contenido de la carpeta `progress-web`.
-2.  **Importa el proyecto en Vercel**:
-    - Conecta tu cuenta de GitHub a Vercel.
-    - Selecciona el repositorio que acabas de crear.
-3.  **Configuración del Proyecto**:
-    - **Framework Preset:** Vercel debería detectar automáticamente que es un proyecto **Next.js**.
-    - **Root Directory:** Asegúrate de que el directorio raíz es `progress-web`. Vercel te permitirá configurarlo durante la importación.
-4.  **Haz clic en "Deploy"**.
-
-Cada vez que hagas `git push` a la rama principal de tu repositorio en GitHub, Vercel desplegará automáticamente los cambios.
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
