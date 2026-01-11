@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd progress-web && pnpm install && pnpm build",
+  "framework": "vite",
+  "rootDirectory": "progress-web"
+}
