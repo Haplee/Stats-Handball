@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -29,5 +30,26 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4"
+=======
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
+    "framer-motion": "^12.25.0",
+    "lucide-react": "^0.562.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^20.19.28",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "latest",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+>>>>>>> main
   }
 }
