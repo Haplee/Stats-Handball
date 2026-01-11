@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import ParticlesBackground from "./ParticlesBackground";
+import dynamic from 'next/dynamic'
+
+const ParticlesBackground = dynamic(() => import('./ParticlesBackground'), { ssr: false })
 
 const HeroSection = () => {
   return (
