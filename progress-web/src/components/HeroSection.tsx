@@ -1,15 +1,14 @@
-"use client";
-
 import { motion } from "framer-motion";
-import Link from "next/link";
-import dynamic from 'next/dynamic'
+import React, { Suspense } from "react";
 
-const ParticlesBackground = dynamic(() => import('./ParticlesBackground'), { ssr: false })
+const ParticlesBackground = React.lazy(() => import('./ParticlesBackground'));
 
 const HeroSection = () => {
   return (
     <div className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-      <ParticlesBackground />
+      <Suspense fallback={<div className="absolute inset-0 z-0 bg-gray-900" />}>
+        <ParticlesBackground />
+      </Suspense>
       <motion.div
         className="relative z-10 p-4"
         initial={{ opacity: 0, y: 20 }}
@@ -37,7 +36,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <Link href="/progress">
+          <a href="/progress">
             <motion.span
               className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg inline-block"
               whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.7)" }}
@@ -46,7 +45,7 @@ const HeroSection = () => {
             >
               Ver Proyecto
             </motion.span>
-          </Link>
+          </a>
         </motion.div>
       </motion.div>
     </div>
