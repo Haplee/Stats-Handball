@@ -36,7 +36,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <a href="/progress">
+          <a href="#dashboard">
             <motion.span
               className="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg inline-block"
               whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(59, 130, 246, 0.7)" }}

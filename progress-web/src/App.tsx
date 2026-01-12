@@ -1,10 +1,10 @@
-import About from "./About";
-import Dashboard from "./Dashboard";
-import Documentation from "./Documentation";
-import Footer from "./Footer";
-import Header from "./Header";
-import Hero from "./Hero";
-import Roadmap from "./Roadmap";
+import About from "./components/About";
+import Dashboard from "./components/Dashboard";
+import Documentation from "./components/Documentation";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Hero from "./components/HeroSection";
+import Roadmap from "./components/Roadmap";
 
 function App() {
   return (
