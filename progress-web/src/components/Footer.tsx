@@ -41,11 +41,11 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h4 className="font-bold mb-6 text-white">Legal</h4>
+                        <h4 className="font-bold mb-6 text-white">Contacto</h4>
                         <ul className="space-y-4 text-sm text-gray-400">
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Política de Privacidad</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Términos</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Licencia (MIT)</a></li>
+                            <li><a href="https://haplee.github.io/Portafolio-FranVi" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors flex items-center gap-2"><Globe size={16} /> Portafolio</a></li>
+                            <li><a href="https://x.com/FranVidalMateo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors flex items-center gap-2"><Twitter size={16} /> Twitter / X</a></li>
+                            <li><a href="https://www.instagram.com/franvidalmateo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors flex items-center gap-2"><Instagram size={16} /> Instagram</a></li>
                         </ul>
                     </div>
                 </div>
