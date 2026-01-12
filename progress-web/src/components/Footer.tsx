@@ -1,4 +1,4 @@
-import { Github, Code2, Activity, Mail } from 'lucide-react';
+import { Github, Code2, Activity, Mail, Globe, Twitter, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -15,11 +15,17 @@ export default function Footer() {
                             Una iniciativa de código abierto para llevar el análisis de video de nivel élite a todos los equipos de balonmano. Construido con Visión Artificial de vanguardia.
                         </p>
                         <div className="flex gap-4">
-                            <a href="https://github.com/Haplee/Stats-Handball" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors">
+                            <a href="https://github.com/Haplee/Stats-Handball" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors" aria-label="GitHub Project">
                                 <Github size={20} />
                             </a>
-                            <a href="mailto:contact@handballstats.com" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors">
-                                <Mail size={20} />
+                            <a href="https://haplee.github.io/Portafolio-FranVi" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors" aria-label="Portfolio">
+                                <Globe size={20} />
+                            </a>
+                            <a href="https://x.com/FranVidalMateo" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors" aria-label="Twitter">
+                                <Twitter size={20} />
+                            </a>
+                            <a href="https://www.instagram.com/franvidalmateo" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full bg-white/5 hover:bg-white/10 hover:text-white text-gray-400 transition-colors" aria-label="Instagram">
+                                <Instagram size={20} />
                             </a>
                         </div>
                     </div>
