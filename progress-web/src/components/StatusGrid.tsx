@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Video, LayoutDashboard, Database, Server, Cpu, Globe } from 'lucide-react';
+import { Video, LayoutDashboard, Server } from 'lucide-react';
 import React from 'react';
 
 const fadeInUp = {
@@ -20,7 +20,7 @@ function StatusCard({ icon, title, status, color, desc }: { icon: React.ReactNod
     return (
         <motion.div
             variants={fadeInUp}
-            className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
+            className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors text-left"
         >
             <div className="flex justify-between items-start mb-4">
                 <div className="p-3 rounded-lg bg-white/5">
@@ -39,35 +39,35 @@ function StatusCard({ icon, title, status, color, desc }: { icon: React.ReactNod
 
 export default function StatusGrid() {
     return (
-        <section className="py-20 container mx-auto px-6 max-w-5xl">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8 text-center">Current System Status</h3>
+        <section className="py-20 w-full">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8 text-center">Estado del Sistema</h3>
             <motion.div
                 variants={staggerContainer}
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left"
             >
                 <StatusCard
                     icon={<Video className="text-purple-400" />}
-                    title="CV Pipeline"
+                    title="Pipeline de Visión (CV)"
                     status="92%"
                     color="bg-purple-500"
-                    desc="YOLOv8 + ByteTrack integration stable. Optimizing occlusion handling."
+                    desc="Integración estable de YOLOv8 + ByteTrack. Optimizando el manejo de oclusiones."
                 />
                 <StatusCard
                     icon={<LayoutDashboard className="text-blue-400" />}
                     title="Frontend UX"
                     status="85%"
                     color="bg-blue-500"
-                    desc="Dashboard & Video Upload UI complete. Implementing playback controls."
+                    desc="Dashboard y subida de videos completada. Implementando controles de reproducción."
                 />
                 <StatusCard
                     icon={<Server className="text-emerald-400" />}
-                    title="API Services"
+                    title="Servicios API"
                     status="98%"
                     color="bg-emerald-500"
-                    desc="FastAPI backend fully decoupled and dockerized."
+                    desc="Backend FastAPI totalmente desacoplado y dockerizado."
                 />
             </motion.div>
         </section>

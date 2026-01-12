@@ -1,23 +1,31 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import StatusGrid from './components/StatusGrid';
-import Features from './components/Features';
-import Roadmap from './components/Roadmap';
-import TechStack from './components/TechStack';
 import Footer from './components/Footer';
+
+// Pages
+import Home from './pages/Home';
+import FeaturesPage from './pages/FeaturesPage';
+import RoadmapPage from './pages/RoadmapPage';
+import TechPage from './pages/TechPage';
+import WebsPage from './pages/WebsPage';
+import StatusGrid from './components/StatusGrid';
 
 export default function App() {
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-gray-100 selection:bg-blue-500/30 scroll-smooth">
-            <Navbar />
-            <main>
-                <Hero />
-                <StatusGrid />
-                <Features />
-                <Roadmap />
-                <TechStack />
-            </main>
-            <Footer />
-        </div>
+        <Router>
+            <div className="min-h-screen bg-[#0a0a0a] text-gray-100 selection:bg-blue-500/30 font-sans">
+                <Navbar />
+                <main>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/features" element={<FeaturesPage />} />
+                        <Route path="/roadmap" element={<RoadmapPage />} />
+                        <Route path="/tech" element={<TechPage />} />
+                        <Route path="/webs" element={<WebsPage />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
+        </Router>
     );
 }
