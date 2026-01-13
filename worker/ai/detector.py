@@ -1,43 +1,40 @@
-import random
+import cv2
+from ultralytics import YOLO
 
-def detect_objects(frames):
-    """
-    Placeholder function for object detection.
+class DetectorIA:
+    def __init__(self, modelo_path='yolov8n.pt'):
+        # Cargamos el modelo YOLOv8 (la versión nano es más rápida para procesar)
+        self.modelo = YOLO(modelo_path)
 
-    In a real implementation, this function would take a list of frames,
-    pass them through a deep learning model (e.g., YOLO), and return
-    structured data about the detected objects (bounding boxes, classes, confidence).
-
-    Args:
-        frames (list): A list of video frames (numpy arrays).
-
-    Returns:
-        list: A list of detections for each frame. Each detection is a list of dicts,
-              where each dict represents a detected object.
-    """
-    print(f"Simulating object detection on {len(frames)} frames...")
-
-    mock_detections = []
-
-    for frame_idx, frame in enumerate(frames):
-        frame_detections = []
-        # Simulate detecting a random number of objects in each frame
-        num_objects = random.randint(5, 15)
-
-        for _ in range(num_objects):
-            detection = {
-                "box": [
-                    random.randint(0, frame.shape[1] - 50), # x1
-                    random.randint(0, frame.shape[0] - 50), # y1
-                    random.randint(50, frame.shape[1]),     # x2
-                    random.randint(50, frame.shape[0])      # y2
-                ],
-                "label": random.choice(["player", "ball", "goalie"]),
-                "confidence": round(random.uniform(0.7, 0.99), 2)
-            }
-            frame_detections.append(detection)
-
-        mock_detections.append(frame_detections)
-
-    print(f"Detection simulation complete. Found objects in {len(mock_detections)} frames.")
-    return mock_detections
+    def detectar_partido(self, frames):
+        """
+        Analiza los frames del partido buscando jugadores, balón y árbitros.
+        """
+        todo_detecciones = []
+        
+        # Procesamos frame a frame (se podría optimizar procesando por batches)
+        for num_frame, imagen in enumerate(frames):
+            # Le pasamos el frame al modelo de ultralytics
+            resultados = self.modelo(imagen, stream=False, verbose=False)[0]
+            
+            detecciones_frame = []
+            for caja in resultados.boxes:
+                # Sacamos las coordenadas, confianza y la clase
+                # Por ahora usamos el modelo preentrenado de COCO (0 es persona, 32 es balón)
+                clase_id = int(caja.cls[0])
+                confianza = float(caja.conf[0])
+                
+                # Solo nos interesan personas (jugadores) y balones
+                if clase_id in [0, 32] and confianza > 0.4:
+                    coords = caja.xyxy[0].tolist() # [x1, y1, x2, y2]
+                    
+                    detecciones_frame.append({
+                        "caja": coords,
+                        "etiqueta": "jugador" if clase_id == 0 else "balon",
+                        "confianza": round(confianza, 2)
+                    })
+            
+            todo_detecciones.append(detecciones_frame)
+            
+        print(f"Análisis IA terminado. Se han procesado {len(todo_detecciones)} frames.")
+        return todo_detecciones

@@ -1,45 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handball AI Platform</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0 auto; max-width: 800px; padding: 2em; background-color: #f4f4f9; }
-        h1, h2 { color: #333; }
-        .container { background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .upload-section { margin-bottom: 2em; }
-        #videoList { list-style: none; padding: 0; }
-        #videoList li { background: #eee; margin-bottom: 0.5em; padding: 1em; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
-        .status { font-weight: bold; }
-        .status-completed { color: green; }
-        .status-processing { color: orange; }
-        .status-pending { color: grey; }
-        .progress-bar { width: 100px; height: 20px; background-color: #ddd; border-radius: 10px; overflow: hidden; }
-        .progress { width: 0; height: 100%; background-color: #4caf50; transition: width 0.4s ease; }
-    </style>
+    <title>Handball AI | Dashboard Técnico</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Feather Icons for professional look -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Plataforma de Análisis de Balonmano</h1>
-
-        <div class="upload-section">
-            <h2>Subir Nuevo Vídeo</h2>
-            <form id="uploadForm">
-                <input type="file" id="videoFile" name="file" accept="video/*" required>
-                <button type="submit">Subir y Procesar</button>
-            </form>
-            <p id="uploadStatus"></p>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i data-feather="activity"></i>
+            Handball<span>AI</span>
         </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active">
+                <i data-feather="grid"></i> Dashboard
+            </a>
+            <a href="#" class="nav-item">
+                <i data-feather="video"></i> Match Library
+            </a>
+            <a href="#" class="nav-item">
+                <i data-feather="users"></i> Team Analysis
+            </a>
+            <a href="#" class="nav-item">
+                <i data-feather="bar-chart-2"></i> Statistics
+            </a>
+            <div style="margin-top: auto; padding-top: 2rem;">
+                <a href="#" class="nav-item">
+                    <i data-feather="settings"></i> Settings
+                </a>
+            </div>
+        </nav>
+    </aside>
 
-        <div class="videos-section">
-            <h2>Vídeos Procesados</h2>
-            <ul id="videoList">
-                <!-- Los vídeos se cargarán aquí dinámicamente -->
-            </ul>
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <header>
+            <div class="search-bar">
+                Search analysis, matches, players...
+            </div>
+            <div class="user-profile">
+                <span style="font-size: 0.8rem; font-weight: 600;">Coach Terminal</span>
+                <div class="avatar"></div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="section-header">
+                <h1>Panel de Análisis</h1>
+                <p>Gestiona y procesa grabaciones de partidos para obtener métricas de alto rendimiento.</p>
+            </div>
+
+            <div class="grid-container">
+                <!-- Left Side: Upload & Library -->
+                <div class="left-col">
+                    <section class="upload-card">
+                        <div class="card-header"
+                            style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                            <h2 style="font-size: 1rem; color: var(--text-main);">Ingesta de Vídeo</h2>
+                            <div class="upload-tabs" style="display: flex; gap: 0.5rem;">
+                                <button onclick="switchTab('file')" class="tab-btn active"
+                                    id="tab-file">Archivo</button>
+                                <button onclick="switchTab('url')" class="tab-btn" id="tab-url">YouTube</button>
+                            </div>
+                        </div>
+
+                        <!-- Local File Upload -->
+                        <div id="file-upload-zone">
+                            <form id="uploadForm">
+                                <label for="videoFile" class="dropzone">
+                                    <i data-feather="upload-cloud" class="dropzone-icon"></i>
+                                    <p style="font-weight: 600; margin-bottom: 0.5rem;">Haz clic para subir un partido
+                                    </p>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">Formatos aceptados: MP4,
+                                        MOV, AVI (Max. 100MB)</p>
+                                    <input type="file" id="videoFile" name="file" accept="video/*">
+                                </label>
+                                <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                                    <button type="submit" class="btn-upload">Iniciar Procesamiento</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- YouTube URL Upload -->
+                        <div id="url-upload-zone" style="display: none;">
+                            <div class="url-input-container"
+                                style="background: var(--bg-accent); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Pega el
+                                    enlace del partido de YouTube para que la IA lo descargue y analice.</p>
+                                <div style="display: flex; gap: 0.75rem;">
+                                    <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..."
+                                        style="flex: 1; background: var(--bg-main); border: 1px solid var(--border); color: white; padding: 0.75rem; border-radius: 8px;">
+                                    <button id="btnUrlSubmit" class="btn-upload" style="margin-top: 0;">Analizar
+                                        Link</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="uploadStatus" style="margin-top: 1rem; font-size: 0.85rem; text-align: center;"></div>
+                    </section>
+
+                    <section class="library-card">
+                        <div class="card-header">
+                            <h2 style="font-size: 1rem;">Biblioteca de Análisis Recientes</h2>
+                        </div>
+                        <div id="videoList" class="video-grid">
+                            <!-- Los vídeos se cargarán aquí dinámicamente -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Side: Quick Stats / Meta -->
+                <div class="right-col">
+                    <div class="library-card"
+                        style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+                        <h3 style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--secondary);">Resumen del Sistema
+                        </h3>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Estado del Worker:</span>
+                                <span style="font-size: 0.8rem; color: var(--success);">Online</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Modelos Activos:</span>
+                                <span style="font-size: 0.8rem;">YOLOv8 + ByteTrack</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="library-card">
+                        <h3 style="font-size: 0.9rem; margin-bottom: 1rem;">Próximas Tareas</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">No hay tareas programadas. Sube un vídeo
+                            para empezar.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="resultsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header"
+                style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 2rem;">
+                <div>
+                    <h2 id="modalTitle" style="margin-bottom: 0.25rem;">Análisis de Partido</h2>
+                    <p id="modalMeta" style="font-size: 0.8rem; color: var(--text-muted);"></p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; align-items: start;">
+                    <button id="btnPdf"
+                        style="background: var(--primary); border: none; color: white; padding: 0.54rem 1rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600;">
+                        <i data-feather="download" style="width: 14px; height: 14px;"></i> Exportar PDF
+                    </button>
+                    <button onclick="closeModal()"
+                        style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 0.5rem; border-radius: 6px; cursor: pointer;">
+                        <i data-feather="x" style="width: 18px; height: 18px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body" id="pdfArea">
+                <div
+                    style="margin-bottom: 1.5rem; display: flex; justify-content: flex-end; align-items: center; gap: 1rem;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Filtrar por Jugador:</span>
+                    <select id="playerFilter"
+                        style="background: var(--bg-accent); border: 1px solid var(--border); color: white; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; outline: none;">
+                        <option value="all">Todos los jugadores</option>
+                    </select>
+                </div>
+                <div class="stats-summary-grid"
+                    style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="stat-card"
+                        style="background: var(--bg-accent); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <span
+                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Intensidad</span>
+                        <div id="statIntensity" style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);">-
+                        </div>
+                    </div>
+                    <div class="stat-card"
+                        style="background: var(--bg-accent); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Vel.
+                            Media</span>
+                        <div id="statSpeed" style="font-size: 1.5rem; font-weight: 700; color: var(--success);">-</div>
+                    </div>
+                    <div class="stat-card"
+                        style="background: var(--bg-accent); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <span
+                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Jugadores</span>
+                        <div id="statPlayers" style="font-size: 1.5rem; font-weight: 700;">-</div>
+                    </div>
+                    <div class="stat-card"
+                        style="background: var(--bg-accent); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <span
+                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Duración</span>
+                        <div id="statDuration" style="font-size: 1.5rem; font-weight: 700;">-</div>
+                    </div>
+                </div>
+
+                <div class="analysis-grid" style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
+                    <div class="heatmap-section">
+                        <h3 style="font-size: 0.9rem; margin-bottom: 1rem;">Mapa de Actividad (Heatmap)</h3>
+                        <div class="court-visual"
+                            style="height: 300px; background: #0f172a; border-radius: 16px; border: 1px solid var(--primary); position: relative; overflow: hidden;">
+                            <div class="court-lines"
+                                style="position: absolute; inset: 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;">
+                            </div>
+                            <div id="heatmapData" style="width: 100%; height: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="player-leaderboard">
+                        <h3 style="font-size: 0.9rem; margin-bottom: 1rem;">Top Performance</h3>
+                        <div id="playerStatsList" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Initialize Icons -->
+    <script>
+        feather.replace();
+    </script>
     <script src="app.js"></script>
 </body>
+
 </html>

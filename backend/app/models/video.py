@@ -2,26 +2,44 @@ from ..extensions import db
 import datetime
 
 class Video(db.Model):
+    # Nombre de la tabla en la base de datos
     __tablename__ = 'videos'
 
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(255), nullable=False)
-    filepath = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.String(50), default='pending', nullable=False) # e.g., pending, processing, completed, failed
-    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    
+    # Datos del archivo físico
+    nombre_fichero = db.Column(db.String(255), nullable=True, name='filename') 
+    ruta_fichero = db.Column(db.String(255), nullable=True, name='filepath')
+    
+    # Enlace de youtube si el vídeo viene de fuera
+    enlace_youtube = db.Column(db.String(500), nullable=True, name='youtube_url')
+    
+    # Estado del procesamiento (pendiente, procesando, completado, fallido)
+    estado = db.Column(db.String(50), default='pending', nullable=False, name='status')
+    
+    # Progreso de 0 a 100
+    progreso = db.Column(db.Integer, default=0, name='progress')
+    
+    # Aquí es donde guardamos todo el chorreo de datos de la IA (jugadores, velocidades, etc)
+    resultados = db.Column(db.JSON, nullable=True, name='results')
+    
+    # Fechas para tenerlo todo controlado
+    creado_el = db.Column(db.DateTime, default=datetime.datetime.utcnow, name='created_at')
+    actualizado_el = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow, name='updated_at')
 
-    # Relationship to results (if results are in a separate table)
-    # results = db.relationship('VideoResult', backref='video', lazy=True)
-
-    def to_dict(self):
+    def a_diccionario(self):
+        """
+        Convierte el objeto a un formato que el frontend entienda bien.
+        """
         return {
             'id': self.id,
-            'filename': self.filename,
-            'status': self.status,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat()
+            'filename': self.nombre_fichero,
+            'status': self.estado,
+            'progress': self.progreso,
+            'results': self.resultados,
+            'created_at': self.creado_el.isoformat(),
+            'updated_at': self.actualizado_el.isoformat()
         }
 
     def __repr__(self):
-        return f'<Video {self.filename}>'
+        return f'<Partido {self.nombre_fichero}>'

@@ -18,4 +18,4 @@ EXPOSE 5000
 
 # Comando para correr la aplicación
 # Usamos gunicorn para un servidor WSGI de producción
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.main:create_app()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.main:crear_app()"]

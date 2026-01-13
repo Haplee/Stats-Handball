@@ -2,6 +2,10 @@ celery
 redis
 opencv-python-headless
 numpy
-# Placeholder for a deep learning framework
+sqlalchemy
+psycopg2-binary
+yt-dlp
+ultralytics
+# Para procesamiento en GPU si estuviera disponible
 # torch
 # torchvision

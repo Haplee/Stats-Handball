@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handball AI | Iniciar Sesión</title>
+    <link rel="stylesheet" href="auth.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo-section">
+                <i data-feather="activity" class="logo-icon"></i>
+                <h1>Handball<span>AI</span></h1>
+                <p>Análisis Inteligente de Partidos</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form">
+                <h2>Iniciar Sesión</h2>
+                <div class="form-group">
+                    <label for="loginUsername">
+                        <i data-feather="user"></i>
+                        Usuario
+                    </label>
+                    <input type="text" id="loginUsername" name="username" required placeholder="tu_usuario">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">
+                        <i data-feather="lock"></i>
+                        Contraseña
+                    </label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i data-feather="log-in"></i>
+                    Entrar
+                </button>
+                <p class="form-switch">
+                    ¿No tienes cuenta? <a href="#" onclick="switchForm('register'); return false;">Regístrate aquí</a>
+                </p>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form" style="display: none;">
+                <h2>Crear Cuenta</h2>
+                <div class="form-group">
+                    <label for="registerUsername">
+                        <i data-feather="user"></i>
+                        Usuario
+                    </label>
+                    <input type="text" id="registerUsername" name="username" required placeholder="tu_usuario">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">
+                        <i data-feather="mail"></i>
+                        Email
+                    </label>
+                    <input type="email" id="registerEmail" name="email" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="registerFullName">
+                        <i data-feather="user-check"></i>
+                        Nombre Completo
+                    </label>
+                    <input type="text" id="registerFullName" name="full_name" placeholder="Tu Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <i data-feather="lock"></i>
+                        Contraseña
+                    </label>
+                    <input type="password" id="registerPassword" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary">
+                    <i data-feather="user-plus"></i>
+                    Registrarse
+                </button>
+                <p class="form-switch">
+                    ¿Ya tienes cuenta? <a href="#" onclick="switchForm('login'); return false;">Inicia sesión</a>
+                </p>
+            </form>
+
+            <div id="authMessage" class="auth-message"></div>
+        </div>
+
+        <div class="auth-background">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

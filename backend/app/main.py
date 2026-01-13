@@ -1,35 +1,54 @@
 from flask import Flask, jsonify
 from .config import Config
 from .extensions import db, migrate
-from .routes.api import api_bp
+from .routes.api import api_rutas
+from .routes.auth import auth_routes
 from .celery_utils import make_celery
+from .models.video import Video
+from .models.user import User
 import os
 
-def create_app(config_class=Config):
+def crear_app(config_class=Config):
     """
-    Factory function to create and configure the Flask application.
+    Función principal para configurar el servidor de Flask.
     """
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    # Initialize extensions
+    # Inicializamos la base de datos y las migraciones
     db.init_app(app)
     migrate.init_app(app, db)
+    
+    # Configurar sesiones para autenticación
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_COOKIE_SECURE'] = False  # True en producción con HTTPS
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+    
+    # Permitimos que el frontend se conecte sin problemas
+    from flask_cors import CORS
+    CORS(app, supports_credentials=True)
 
-    # Initialize Celery
+    # Arrancamos Celery para las tareas en segundo plano
     celery = make_celery(app)
     app.celery = celery
 
-    # Register blueprints
-    app.register_blueprint(api_bp, url_prefix='/api')
+    # Registramos las rutas de nuestra API
+    app.register_blueprint(api_rutas, url_prefix='/api')
+    app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
-    # A simple health check endpoint
+    # Un pequeño test para ver si el servidor responde
     @app.route('/health')
-    def health_check():
-        return jsonify({"status": "healthy"}), 200
+    def test_servidor():
+        return jsonify({"estado": "funcionando", "servidor": "ok"}), 200
 
-    # Create upload folder if it doesn't exist
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
+    # Nos aseguramos de que la carpeta de subidas esté lista
+    ruta_subidas = app.config['UPLOAD_FOLDER']
+    if not os.path.exists(ruta_subidas):
+        os.makedirs(ruta_subidas)
+
+    # Crear las tablas de la base de datos si no existen
+    with app.app_context():
+        db.create_all()
 
     return app
