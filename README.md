@@ -106,29 +106,87 @@ docker compose down
 ## 📂 Estructura del Proyecto
 ```
 handball-ai-platform/
-├── docker-compose.yml        # Orquestación de servicios
-├── .env.example              # Plantilla de variables de entorno
-├── README.md                 # Este archivo
-├── docs/                     # Documentación adicional
-│   ├── architecture.md
-│   └── deployment.md
-├── nginx/                    # Configuración del proxy inverso
-│   ├── Dockerfile
-│   └── default.conf
-├── backend/                  # Servicio de la API (Flask)
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── app/
-├── worker/                   # Servicio de procesamiento (Celery)
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── ai/
-├── frontend/                 # Interfaz de usuario
-│   ├── Dockerfile
-│   ├── index.html
-│   └── app.js
-└── scripts/                  # Scripts útiles
-    └── init_db.sh
+   ├── 📁 .github
+   │   └── 📁 workflows
+   │       └── ⚙️ python-app.yml
+   ├── 📁 backend
+   │   ├── 📁 app
+   │   │   ├── 📁 models
+   │   │   │   ├── 🐍 user.py
+   │   │   │   └── 🐍 video.py
+   │   │   ├── 📁 routes
+   │   │   │   ├── 🐍 api.py
+   │   │   │   └── 🐍 auth.py
+   │   │   ├── 🐍 celery_utils.py
+   │   │   ├── 🐍 config.py
+   │   │   ├── 🐍 excel_manager.py
+   │   │   ├── 🐍 extensions.py
+   │   │   ├── 🐍 main.py
+   │   │   └── 🐍 utils.py
+   │   ├── 📁 uploads
+   │   ├── 🐳 Dockerfile
+   │   └── 📄 requirements.txt
+   ├── 📁 docs
+   │   ├── 📝 architecture.md
+   │   └── 📝 deployment.md
+   ├── 📁 frontend
+   │   ├── 🐳 Dockerfile
+   │   ├── 📄 app.js
+   │   ├── 🎨 auth.css
+   │   ├── 🌐 index.html
+   │   ├── 🌐 login.html
+   │   └── 🎨 style.css
+   ├── 📁 nginx
+   │   ├── 🐳 Dockerfile
+   │   └── ⚙️ default.conf
+   ├── 📁 progress-web
+   │   ├── 📁 src
+   │   │   ├── 📁 components
+   │   │   │   ├── 📄 Features.tsx
+   │   │   │   ├── 📄 Footer.tsx
+   │   │   │   ├── 📄 Hero.tsx
+   │   │   │   ├── 📄 Navbar.tsx
+   │   │   │   ├── 📄 Roadmap.tsx
+   │   │   │   ├── 📄 StatusGrid.tsx
+   │   │   │   └── 📄 TechStack.tsx
+   │   │   ├── 📁 data
+   │   │   │   └── ⚙️ webs.json
+   │   │   ├── 📁 pages
+   │   │   │   ├── 📄 FeaturesPage.tsx
+   │   │   │   ├── 📄 Home.tsx
+   │   │   │   ├── 📄 RoadmapPage.tsx
+   │   │   │   ├── 📄 TechPage.tsx
+   │   │   │   └── 📄 WebsPage.tsx
+   │   │   ├── 📄 App.tsx
+   │   │   ├── 🎨 index.css
+   │   │   └── 📄 main.tsx
+   │   ├── 📝 VERCEL_FIX.md
+   │   ├── 🌐 index.html
+   │   ├── ⚙️ package.json
+   │   ├── ⚙️ tsconfig.app.json
+   │   ├── ⚙️ tsconfig.json
+   │   ├── ⚙️ tsconfig.node.json
+   │   ├── ⚙️ vercel.json
+   │   └── 📄 vite.config.ts
+   ├── 📁 scripts
+   │   └── 📄 init_db.sh
+   ├── 📁 worker
+   │   ├── 📁 ai
+   │   │   ├── 🐍 database.py
+   │   │   ├── 🐍 detector.py
+   │   │   ├── 🐍 tasks.py
+   │   │   ├── 🐍 tracker.py
+   │   │   └── 🐍 video.py
+   │   ├── 📁 videos
+   │   ├── 🐳 Dockerfile
+   │   ├── 📄 requirements.txt
+   │   └── 📄 yolov8n.pt
+   ├── ⚙️ .env.example
+   ├── ⚙️ .gitignore
+   ├── 📝 README.md
+   ├── ⚙️ docker-compose.yml
+   ├── ⚙️ vercel.json
+   └── 🐍 verifier.py
 ```
 
 ## 🛣️ Próximos Pasos
