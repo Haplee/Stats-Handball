@@ -11,7 +11,7 @@ def formatear_tiempo_balonmano(segundos):
         return "00:00"
     minutos = int(segundos // 60)
     segs = int(segundos % 60)
-    return f("{minutos:02d}:{segs:02d}")
+    return f"{minutos:02d}:{segs:02d}"
 
 def generar_nombre_unico(nombre_original):
     """
@@ -21,7 +21,7 @@ def generar_nombre_unico(nombre_original):
     nombre_limpio = secure_filename(nombre_original)
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     nombre, extension = os.path.splitext(nombre_limpio)
-    return f("{nombre}_{timestamp}{extension}")
+    return f"{nombre}_{timestamp}{extension}"
 
 def validar_tamano_archivo(archivo, max_mb=500):
     """
@@ -40,4 +40,16 @@ def calcular_efectividad(aciertos, totales):
     if totales == 0:
         return 0.0
     return round((aciertos / totales) * 100, 2)
+
+def es_archivo_valido(filename):
+    ALLOWED_EXTENSIONS = {'mp4', 'mov', 'avi'}
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def obtener_info_archivo(filepath):
+    try:
+        size_bytes = os.path.getsize(filepath)
+        return round(size_bytes / (1024 * 1024), 2)
+    except Exception:
+        return 0.0
 

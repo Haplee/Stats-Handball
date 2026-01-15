@@ -5,7 +5,7 @@ import pandas as pd
 
 from ..models.video import Video
 from ..extensions import db
-from ..utils.handball_utils import (
+from ..utils import (
     generar_nombre_unico,
     es_archivo_valido,
     obtener_info_archivo
@@ -43,8 +43,8 @@ def subir_video_partido():
     nuevo_video = Video(
         nombre_fichero=nombre_unico,
         ruta_fichero=ruta_guardado,
-        estado='pending',
-        tamano_mb=tamano_mb  # solo si existe en tu modelo
+        estado='pending'
+        # tamano_mb=tamano_mb  # campo no existente en modelo
     )
 
     db.session.add(nuevo_video)
