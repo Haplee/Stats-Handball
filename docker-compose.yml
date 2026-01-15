@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-      - frontend
-    networks:
-      - app-network
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - backend
+  #     - frontend
+  #   networks:
+  #     - app-network
 
   backend:
     build: ./backend
@@ -21,6 +21,8 @@ services:
     volumes:
       - ./backend:/app
       - videos:/app/uploads
+    ports:
+      - "5000:5000"
     networks:
       - app-network
 
@@ -51,7 +53,14 @@ services:
       - app-network
 
   frontend:
-    build: ./frontend
+    build: ./progress-web
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_BACKEND_URL=http://backend:5000
+    volumes:
+      - ./progress-web:/app
+      - /app/node_modules
     networks:
       - app-network
 
