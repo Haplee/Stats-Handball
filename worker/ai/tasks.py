@@ -48,8 +48,8 @@ def calculate_pixel_distance(pasos):
     pasos_np = np.array(pasos)
     # Calculamos la diferencia entre puntos consecutivos
     diffs = np.diff(pasos_np, axis=0)
-    # Calculamos la distancia euclidiana de cada segmento y sumamos
-    dist_pixeles = np.sum(np.sqrt(np.sum(diffs**2, axis=1)))
+    # Calculamos la distancia euclidiana de cada segmento y sumamos. np.hypot es más rápido y estable.
+    dist_pixeles = np.sum(np.hypot(diffs[:, 0], diffs[:, 1]))
     return float(dist_pixeles)
 
 @celery_app.task(name='process_video_task')
@@ -105,6 +105,7 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
             trayectorias_por_jugador[str(id_jugador)] = puntos_formateados
 
             # Cálculos de rendimiento
+            # Optimized: using vectorized calculation (calculate_pixel_distance) instead of loop
             dist_pixeles = calculate_pixel_distance(pasos)
             dist_metros = dist_pixeles * 0.05 
             velocidad_max = (dist_metros / len(pasos)) * video_properties["fps"] * 3.6
