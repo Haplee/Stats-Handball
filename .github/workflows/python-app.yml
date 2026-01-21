@@ -29,6 +29,8 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f worker/requirements.txt ]; then pip install -r worker/requirements.txt; fi
+          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
 
       # 4️⃣ Linter con flake8
       - name: Lint with flake8
@@ -51,4 +53,3 @@ jobs:
             echo "✅ Found $TEST_COUNT test(s), running pytest..."
             pytest --maxfail=1 --disable-warnings
           fi
-
