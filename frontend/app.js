@@ -166,9 +166,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ABRIR EL MODAL DE RESULTADOS
-    window.abrirConsultoria = (id) => {
-        const v = todosLosVideos.find(x => x.id === id);
-        if (!v || !v.results) return;
+    window.abrirConsultoria = async (id) => {
+        let v = todosLosVideos.find(x => x.id === id);
+        if (!v) return;
+
+        // Si no tenemos los resultados, los pedimos al servidor
+        if (!v.results) {
+            try {
+                const resp = await fetch(`/api/videos/${id}`);
+                if (!resp.ok) throw new Error('Error al cargar detalles');
+                const completo = await resp.json();
+
+                // Actualizamos la lista local
+                const idx = todosLosVideos.findIndex(x => x.id === id);
+                if (idx !== -1) todosLosVideos[idx] = completo;
+                v = completo;
+            } catch (err) {
+                console.error(err);
+                alert('No se pudieron cargar los detalles del análisis.');
+                return;
+            }
+        }
+
+        if (!v.results) return;
 
         const res = v.results;
         document.getElementById('modalTitle').textContent = v.filename;
@@ -189,11 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Evento para FILTRAR EL MAPA DE CALOR
         filtro.onchange = () => {
-            dibujarMapaCalor(v.id, filtro.value);
+            dibujarMapaCalor(v, filtro.value);
         };
 
         // Dibujamos el mapa por defecto (todos)
-        dibujarMapaCalor(v.id, 'all');
+        dibujarMapaCalor(v, 'all');
 
         // Ponemos la tablita de los mejores
         const listaJugadores = document.getElementById('playerStatsList');
@@ -227,16 +247,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Función para pintar los puntitos del mapa
-    function dibujarMapaCalor(idVideo, idFiltro) {
-        const v = todosLosVideos.find(x => x.id === idVideo);
+    function dibujarMapaCalor(video, idFiltro) {
         const contenedor = document.getElementById('heatmapData');
         contenedor.innerHTML = '';
 
         let puntos = [];
         if (idFiltro === 'all') {
-            puntos = v.results.heatmap_all;
+            puntos = video.results.heatmap_all;
         } else {
-            puntos = v.results.heatmap_players[idFiltro] || [];
+            puntos = video.results.heatmap_players[idFiltro] || [];
         }
 
         puntos.forEach(p => {

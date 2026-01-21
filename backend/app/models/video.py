@@ -41,5 +41,18 @@ class Video(db.Model):
             'updated_at': self.actualizado_el.isoformat()
         }
 
+    def to_summary_dict(self):
+        """
+        Devuelve un resumen del objeto sin los resultados pesados.
+        """
+        return {
+            'id': self.id,
+            'filename': self.nombre_fichero,
+            'status': self.estado,
+            'progress': self.progreso,
+            'created_at': self.creado_el.isoformat(),
+            'updated_at': self.actualizado_el.isoformat()
+        }
+
     def __repr__(self):
         return f'<Partido {self.nombre_fichero}>'

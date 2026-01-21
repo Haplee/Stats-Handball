@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 from ..models.video import Video
 from ..extensions import db
+from sqlalchemy.orm import defer
 
 # Definimos el blueprint para las rutas de la API
 api_rutas = Blueprint('api', __name__)
@@ -84,8 +85,8 @@ def listar_todos_los_videos():
     """
     Devuelve la lista de todos los partidos que hemos analizado o que están en ello.
     """
-    partidos = Video.query.all()
-    return jsonify([p.a_diccionario() for p in partidos]), 200
+    partidos = Video.query.options(defer(Video.resultados)).all()
+    return jsonify([p.to_summary_dict() for p in partidos]), 200
 
 @api_rutas.route('/videos/<int:id_video>', methods=['GET'])
 def ver_estado_partido(id_video):
