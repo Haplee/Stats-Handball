@@ -37,6 +37,21 @@ def descargar_desde_youtube(url_enlace, carpeta_videos='/app/videos'):
         nombre_archivo = ydl.prepare_filename(info_video)
         return nombre_archivo
 
+def calculate_pixel_distance(pasos):
+    """
+    Calcula la distancia total en píxeles recorrida en una trayectoria.
+    Optimizado usando NumPy para evitar bucles lentos en Python.
+    """
+    if not pasos or len(pasos) < 2:
+        return 0.0
+
+    pasos_np = np.array(pasos)
+    # Calculamos la diferencia entre puntos consecutivos
+    diffs = np.diff(pasos_np, axis=0)
+    # Calculamos la distancia euclidiana de cada segmento y sumamos
+    dist_pixeles = np.sum(np.sqrt(np.sum(diffs**2, axis=1)))
+    return float(dist_pixeles)
+
 @celery_app.task(name='process_video_task')
 def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
     """
@@ -90,8 +105,7 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
             trayectorias_por_jugador[str(id_jugador)] = puntos_formateados
 
             # Cálculos de rendimiento
-            dist_pixeles = sum(np.sqrt((pasos[i][0]-pasos[i-1][0])**2 + (pasos[i][1]-pasos[i-1][1])**2) 
-                             for i in range(1, len(pasos)))
+            dist_pixeles = calculate_pixel_distance(pasos)
             dist_metros = dist_pixeles * 0.05 
             velocidad_max = (dist_metros / len(pasos)) * video_properties["fps"] * 3.6
             
