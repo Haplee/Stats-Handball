@@ -27,19 +27,21 @@ class Video(db.Model):
     creado_el = db.Column(db.DateTime, default=datetime.datetime.utcnow, name='created_at')
     actualizado_el = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow, name='updated_at')
 
-    def a_diccionario(self):
+    def a_diccionario(self, include_results=True):
         """
         Convierte el objeto a un formato que el frontend entienda bien.
         """
-        return {
+        data = {
             'id': self.id,
             'filename': self.nombre_fichero,
             'status': self.estado,
             'progress': self.progreso,
-            'results': self.resultados,
             'created_at': self.creado_el.isoformat(),
             'updated_at': self.actualizado_el.isoformat()
         }
+        if include_results:
+            data['results'] = self.resultados
+        return data
 
     def __repr__(self):
         return f'<Partido {self.nombre_fichero}>'
