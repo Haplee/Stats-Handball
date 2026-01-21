@@ -58,15 +58,15 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
             print(f"Usando archivo local: {ruta_final}")
             update_video_progress(id_video, 15)
 
-        # 2. Sacamos los frames
-        frames = video.load_video(ruta_final)
-        if not frames:
-            raise ValueError("El vídeo está vacío o corrupto.")
+        # 2. Procesamos el vídeo frame a frame
+        video_properties, frames_generator = video.process_video(ruta_final)
+        if not video_properties:
+            raise ValueError("El vídeo está vacío o es corrupto.")
         update_video_progress(id_video, 45)
 
         # 3. Tracking Real
         print("Empezando el tracking real...")
-        detecciones_frames, rutas_jugadores = seguidor_ia.trackear_partido(frames)
+        detecciones_frames, rutas_jugadores = seguidor_ia.trackear_partido(frames_generator)
         update_video_progress(id_video, 85)
 
         # 4. Cocinamos métricas
@@ -74,8 +74,8 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
         
         stats_jugadores = []
         trayectorias_por_jugador = {}
-        ancho_v = frames[0].shape[1]
-        alto_v = frames[0].shape[0]
+        ancho_v = video_properties["width"]
+        alto_v = video_properties["height"]
         
         for id_jugador, pasos in rutas_jugadores.items():
             if len(pasos) < 10: continue
@@ -93,7 +93,7 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
             dist_pixeles = sum(np.sqrt((pasos[i][0]-pasos[i-1][0])**2 + (pasos[i][1]-pasos[i-1][1])**2) 
                              for i in range(1, len(pasos)))
             dist_metros = dist_pixeles * 0.05 
-            velocidad_max = (dist_metros / len(pasos)) * 30 * 3.6 
+            velocidad_max = (dist_metros / len(pasos)) * video_properties["fps"] * 3.6
             
             stats_jugadores.append({
                 "id": str(id_jugador),
@@ -104,9 +104,14 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
 
         update_video_progress(id_video, 95)
 
+        # Calculamos la duración total del vídeo
+        total_seconds = video_properties["frame_count"] / video_properties["fps"]
+        minutes = int(total_seconds // 60)
+        seconds = int(total_seconds % 60)
+
         datos_finales = {
             "summary": {
-                "duration": f"{len(frames)//30//60}:{len(frames)//30%60:02d}",
+                "duration": f"{minutes}:{seconds:02d}",
                 "total_players": len(stats_jugadores),
                 "avg_speed": f"{round(random.uniform(17, 23), 1)} km/h",
                 "intensity_score": f"{min(98, 55 + len(stats_jugadores)*2)}%"
