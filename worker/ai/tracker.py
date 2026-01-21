@@ -12,7 +12,6 @@ class SeguidorIA:
         usando el algoritmo ByteTrack integrado en YOLOv8.
         """
         trayectorias = {}
-        info_por_frame = []
 
         print("Empezando el rastreo de jugadores en el campo...")
 
@@ -21,26 +20,16 @@ class SeguidorIA:
             # Conf=0.3 para no perder jugadores y iou=0.5 para el solapamiento
             resultados = self.modelo.track(frame, persist=True, tracker="bytetrack.yaml", verbose=False)[0]
             
-            detecciones_frame = []
-            
             # Revisamos qué ha encontrado la IA en este frame
             if resultados.boxes.id is not None:
                 cajas = resultados.boxes.xyxy.cpu().numpy()
                 ids = resultados.boxes.id.cpu().numpy().astype(int)
                 clases = resultados.boxes.cls.cpu().numpy().astype(int)
-                confidencias = resultados.boxes.conf.cpu().numpy()
 
-                for caja, id_obj, clase, conf in zip(cajas, ids, clases, confidencias):
+                for caja, id_obj, clase in zip(cajas, ids, clases):
                     # Solo nos interesan jugadores (clase 0) por ahora
                     if clase == 0:
                         x1, y1, x2, y2 = caja
-                        
-                        # Guardamos info para el frontend
-                        detecciones_frame.append({
-                            "id": int(id_obj),
-                            "caja": [float(x1), float(y1), float(x2), float(y2)],
-                            "confianza": round(float(conf), 2)
-                        })
 
                         # Registramos la posición para calcular estadísticas después
                         if id_obj not in trayectorias:
@@ -51,7 +40,5 @@ class SeguidorIA:
                         centro_y = (y1 + y2) / 2
                         trayectorias[id_obj].append((centro_x, centro_y))
             
-            info_por_frame.append(detecciones_frame)
-
         print(f"Rastreo completado. Hemos seguido a {len(trayectorias)} entes distintos.")
-        return info_por_frame, trayectorias
+        return trayectorias

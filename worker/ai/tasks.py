@@ -81,7 +81,7 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
 
         # 3. Tracking Real
         print("Empezando el tracking real...")
-        detecciones_frames, rutas_jugadores = seguidor_ia.trackear_partido(frames_generator)
+        rutas_jugadores = seguidor_ia.trackear_partido(frames_generator)
         update_video_progress(id_video, 85)
 
         # 4. Cocinamos métricas
