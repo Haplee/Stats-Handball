@@ -21,7 +21,6 @@ def crear_app(config_class=Config):
     
     # Configurar sesiones para autenticación
     app.config['SESSION_TYPE'] = 'filesystem'
-    app.config['SESSION_COOKIE_SECURE'] = False  # True en producción con HTTPS
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
     
