@@ -125,6 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
             dibujarListaVideos(todosLosVideos);
         } catch (error) {
             console.error('Error al pedir vídeos:', error);
+        } finally {
+            // Adaptive polling: poll faster if we have active jobs
+            let nextPoll = 30000;
+            if (Array.isArray(todosLosVideos) && todosLosVideos.some(v => v.status === 'procesando')) {
+                nextPoll = 5000;
+            }
+            setTimeout(pedirVideos, nextPoll);
         }
     }
 
@@ -258,6 +265,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('resultsModal').style.display = 'none';
     };
 
-    // Actualizamos la lista cada 3 segundos por si hay novedades
-    setInterval(pedirVideos, 3000);
+    // El polling ya se gestiona dentro de pedirVideos de forma adaptativa
 });
