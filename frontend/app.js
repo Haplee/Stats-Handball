@@ -173,9 +173,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ABRIR EL MODAL DE RESULTADOS
-    window.abrirConsultoria = (id) => {
-        const v = todosLosVideos.find(x => x.id === id);
-        if (!v || !v.results) return;
+    window.abrirConsultoria = async (id) => {
+        let v = todosLosVideos.find(x => x.id === id);
+        if (!v) return;
+
+        if (!v.results) {
+            // Cargar detalles si no están (lazy loading para mejorar rendimiento)
+            try {
+                const resp = await fetch(`/api/videos/${id}`);
+                if (!resp.ok) throw new Error('Error cargando detalles');
+                const fullVideo = await resp.json();
+
+                // Actualizar caché local
+                const idx = todosLosVideos.findIndex(x => x.id === id);
+                if (idx !== -1) todosLosVideos[idx] = fullVideo;
+                v = fullVideo;
+            } catch (e) {
+                console.error(e);
+                alert('No se pudieron cargar los detalles del análisis.');
+                return;
+            }
+        }
+
+        if (!v.results) return;
 
         const res = v.results;
         document.getElementById('modalTitle').textContent = v.filename;

@@ -84,8 +84,8 @@ def listar_todos_los_videos():
     """
     Devuelve la lista de todos los partidos que hemos analizado o que están en ello.
     """
-    partidos = Video.query.all()
-    return jsonify([p.a_diccionario() for p in partidos]), 200
+    partidos = Video.query.options(db.defer(Video.resultados)).all()
+    return jsonify([p.a_diccionario(include_results=False) for p in partidos]), 200
 
 @api_rutas.route('/videos/<int:id_video>', methods=['GET'])
 def ver_estado_partido(id_video):
