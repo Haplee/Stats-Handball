@@ -5,6 +5,9 @@ load_dotenv()
 
 class Config:
     """Base configuration."""
+    SESSION_COOKIE_SECURE = os.environ.get('FLASK_ENV') == 'production'
+    SESSION_COOKIE_SECURE = os.environ.get('FLASK_ENV') == 'production'
+    SESSION_COOKIE_SECURE = os.environ.get('FLASK_ENV') == 'production'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'a-very-secret-key'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
