@@ -12,6 +12,10 @@ class SeguidorIA:
         usando el algoritmo ByteTrack integrado en YOLOv8.
         """
         trayectorias = {}
+        clases_detectadas = {}
+
+        # 0: Person (Players, Referees), 32: Sports Ball
+        ALLOWED_CLASSES = [0, 32]
 
         print("Empezando el rastreo de jugadores en el campo...")
 
@@ -27,13 +31,14 @@ class SeguidorIA:
                 clases = resultados.boxes.cls.cpu().numpy().astype(int)
 
                 for caja, id_obj, clase in zip(cajas, ids, clases):
-                    # Solo nos interesan jugadores (clase 0) por ahora
-                    if clase == 0:
+                    # Solo nos interesan jugadores (clase 0) y balón (clase 32)
+                    if clase in ALLOWED_CLASSES:
                         x1, y1, x2, y2 = caja
 
                         # Registramos la posición para calcular estadísticas después
                         if id_obj not in trayectorias:
                             trayectorias[id_obj] = []
+                            clases_detectadas[id_obj] = int(clase)
                         
                         # Guardamos el centro del jugador para el mapa de calor
                         centro_x = (x1 + x2) / 2
@@ -41,4 +46,4 @@ class SeguidorIA:
                         trayectorias[id_obj].append((centro_x, centro_y))
             
         print(f"Rastreo completado. Hemos seguido a {len(trayectorias)} entes distintos.")
-        return trayectorias
+        return trayectorias, clases_detectadas
