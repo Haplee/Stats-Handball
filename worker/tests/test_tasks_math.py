@@ -1,4 +1,3 @@
-
 import sys
 import unittest
 from unittest.mock import MagicMock
@@ -13,16 +12,13 @@ sys.modules['worker.ai.video'] = MagicMock()
 sys.modules['worker.ai.tracker'] = MagicMock()
 sys.modules['worker.ai.database'] = MagicMock()
 
-# We need to make sure we can import worker.ai.tasks
-# Assuming the test is run from the repo root or worker directory
-# If run from repo root, 'worker' is a package.
-
 try:
     from worker.ai import tasks
 except ImportError:
     # If running from inside worker dir, add . to path
     sys.path.append('.')
     from worker.ai import tasks
+
 
 class TestDistanceCalculation(unittest.TestCase):
     def test_calculate_pixel_distance_basic(self):
@@ -47,12 +43,17 @@ class TestDistanceCalculation(unittest.TestCase):
         pasos = [(0, 0), (1, 1), (2, 2), (5, 6)]
 
         # Old implementation logic
-        expected_dist = sum(np.sqrt((pasos[i][0]-pasos[i-1][0])**2 + (pasos[i][1]-pasos[i-1][1])**2)
-                             for i in range(1, len(pasos)))
+        expected_dist = sum(
+            np.sqrt(
+                (pasos[i][0]-pasos[i-1][0])**2 + (pasos[i][1]-pasos[i-1][1])**2
+            )
+            for i in range(1, len(pasos))
+        )
 
         if hasattr(tasks, 'calculate_pixel_distance'):
             dist = tasks.calculate_pixel_distance(pasos)
             self.assertAlmostEqual(dist, expected_dist)
+
 
 if __name__ == '__main__':
     unittest.main()
