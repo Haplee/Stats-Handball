@@ -16,6 +16,21 @@ except ImportError:
 
 
 class TestTracker(unittest.TestCase):
+    def setUp(self):
+        # Ensure worker.ai.tracker is NOT a mock
+        if 'worker.ai.tracker' in sys.modules and isinstance(sys.modules['worker.ai.tracker'], MagicMock):
+            del sys.modules['worker.ai.tracker']
+        
+        # Re-import to get the real class
+        global SeguidorIA
+        if 'worker.ai.tracker' not in sys.modules:
+            from worker.ai.tracker import SeguidorIA
+        else:
+            import importlib
+            import worker.ai.tracker
+            importlib.reload(worker.ai.tracker)
+            from worker.ai.tracker import SeguidorIA
+
     def test_trackear_partido_tracks_objects(self):
         tracker = SeguidorIA()
 
@@ -65,7 +80,7 @@ class TestTracker(unittest.TestCase):
 
         else:
             self.fail(
-                "trackear_partido should return a tuple (trayectorias, clases)"
+                f"trackear_partido should return a tuple (trayectorias, clases). Got {type(result)}: {result}"
             )
 
 

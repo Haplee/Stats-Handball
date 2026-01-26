@@ -24,7 +24,7 @@ export default function TechPage() {
                 </div>
 
                 <p className="text-gray-400 mb-8 border-b border-white/5 pb-8">
-                    Utilizamos herramientas de última generación para garantizar rendimiento, escalabilidad y precisión en el análisis de video.
+                    Utilizamos un stack robusto y validado con tests unitarios automatizados que garantizan la precisión matemática en el tracking y análisis de rendimiento.
                 </p>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

@@ -9,8 +9,8 @@ const features = [
     },
     {
         icon: <Users className="text-purple-400" size={32} />,
-        title: "Reconocimiento de Jugadores",
-        desc: "Identificación y seguimiento de jugadores individuales, árbitros y porteros con re-identificación consistente."
+        title: "Reconocimiento Inteligente",
+        desc: "Sistema de filtrado verificado que distingue exclusivamente jugadores y balón, ignorando árbitros, público y elementos externos para estadísticas limpias."
     },
     {
         icon: <BarChart3 className="text-emerald-400" size={32} />,

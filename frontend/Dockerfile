@@ -1,11 +1,13 @@
-# Stage 1: Use a lightweight web server
-FROM nginx:stable-alpine
+FROM node:20-slim
 
-# Copy the static files from the frontend directory into the Nginx html directory
-COPY . /usr/share/nginx/html
+WORKDIR /app
 
-# Expose port 80
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
 EXPOSE 80
 
-# The default Nginx command will start the server
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "80"]

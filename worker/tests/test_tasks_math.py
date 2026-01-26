@@ -9,7 +9,6 @@ sys.modules['cv2'] = MagicMock()
 sys.modules['ultralytics'] = MagicMock()
 sys.modules['yt_dlp'] = MagicMock()
 sys.modules['worker.ai.video'] = MagicMock()
-sys.modules['worker.ai.tracker'] = MagicMock()
 sys.modules['worker.ai.database'] = MagicMock()
 
 try:

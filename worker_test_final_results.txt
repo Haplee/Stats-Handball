@@ -1,0 +1,8 @@
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.004s
+
+OK
+Anßlisis IA terminado. Se han procesado 1 frames.
+Empezando el rastreo de jugadores en el campo...
+Rastreo completado. Hemos seguido a 2 entes distintos.
