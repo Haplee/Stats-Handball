@@ -45,15 +45,16 @@ export default function RoadmapPage() {
                     desc="Primer rastreo exitoso de balón y jugadores en entornos controlados. Visualizador básico construido con OpenCV."
                 />
                 <TimelineItem
-                    active
+                    done
                     date="Ene 2026"
-                    title="Integración de Plataforma"
-                    desc="Integrando el motor de inferencia Python con el Frontend React. Construcción de la capa API para procesamiento asíncrono."
+                    title="Backend & Core IA Completado"
+                    desc="API REST segura implementada (Auth, CRUD, Videos). Pipeline de procesamiento asíncrono (Celery/Redis) integrado y validado con tests unitarios."
                 />
                 <TimelineItem
+                    active
                     date="Feb 2026"
                     title="Lanzamiento Beta (MVP)"
-                    desc="Lanzamiento del pipeline completo: Subir Video -> Procesar -> Ver Estadísticas. Acceso restringido para pruebas."
+                    desc="Conectando el frontend con la API real. Preparando el despliegue para subida de vídeos y visualización de estadísticas en tiempo real."
                 />
                 <TimelineItem
                     date="Mar 2026"

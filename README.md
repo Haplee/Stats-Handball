@@ -88,9 +88,15 @@ Sigue estos pasos para levantar el entorno de desarrollo local.
    *Puedes modificar las credenciales si lo deseas, pero la configuración por defecto está lista para desarrollo.*
 
 3. **Construye y levanta los contenedores:**
-   Este comando construirá las imágenes de Docker para cada servicio y los iniciará en segundo plano.
+   
+   Ejecuta el script de inicio en la raíz del proyecto (Windows):
+   ```cmd
+   .\start.bat
+   ```
+   
+   O si prefieres manual:
    ```bash
-   docker compose up --build -d
+   docker-compose up -d --build
    ```
 
 4. **Accede a la aplicación:**

@@ -9,7 +9,12 @@ def make_celery(app):
         backend=app.config['CELERY_RESULT_BACKEND'],
         broker=app.config['CELERY_BROKER_URL']
     )
-    celery.conf.update(app.config)
+    # Use the new configuration keys to avoid mixing errors
+    celery.conf.update(
+        broker_url=app.config['CELERY_BROKER_URL'],
+        result_backend=app.config['CELERY_RESULT_BACKEND'],
+        task_always_eager=app.config.get('CELERY_ALWAYS_EAGER', False)
+    )
 
     class ContextTask(celery.Task):
         def __call__(self, *args, **kwargs):

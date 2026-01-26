@@ -12,6 +12,9 @@ class Video(db.Model):
     nombre_fichero = db.Column(db.String(255), nullable=True, name='filename')
     ruta_fichero = db.Column(db.String(255), nullable=True, name='filepath')
 
+    # Relación con el usuario propietario
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
     # Enlace de youtube si el vídeo viene de fuera
     enlace_youtube = db.Column(
         db.String(500), nullable=True, name='youtube_url'

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, session
 from werkzeug.utils import secure_filename
 import os
 from ..models.video import Video
@@ -17,7 +17,18 @@ def es_formato_permitido(nombre_archivo):
            nombre_archivo.rsplit('.', 1)[1].lower() in extensiones
 
 
+def login_required(f):
+    from functools import wraps
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return jsonify({"error": "No estás autenticado"}), 401
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @api_rutas.route('/upload', methods=['POST'])
+@login_required
 def subir_video_partido():
     """
     Recibe un vídeo por formulario y lo guarda para mandarlo a la cola.
@@ -42,11 +53,12 @@ def subir_video_partido():
         ruta_guardado = os.path.join(directorio_subidas, nombre_limpio)
         archivo.save(ruta_guardado)
 
-        # Creamos la ficha en la base de datos
+        # Creamos la ficha en la base de datos asociada al usuario
         nuevo_video = Video(
             nombre_fichero=nombre_limpio,
             ruta_fichero=ruta_guardado,
-            estado='pending'
+            estado='pending',
+            user_id=session['user_id']
         )
         db.session.add(nuevo_video)
         db.session.commit()
@@ -70,6 +82,7 @@ def subir_video_partido():
 
 
 @api_rutas.route('/upload-url', methods=['POST'])
+@login_required
 def procesar_enlace_youtube():
     """
     Pilla un enlace de Youtube y lo manda al worker para que se lo baje.
@@ -80,11 +93,12 @@ def procesar_enlace_youtube():
     if not url or ('youtube.com' not in url and 'youtu.be' not in url):
         return jsonify({"error": "Ese enlace no parece de Youtube..."}), 400
 
-    # Creamos el registro como pendiente
+    # Creamos el registro como pendiente asocidado al usuario
     video_youtube = Video(
         enlace_youtube=url,
         nombre_fichero=f"YouTube: {url[:30]}...",
-        estado='pending'
+        estado='pending',
+        user_id=session['user_id']
     )
     db.session.add(video_youtube)
     db.session.commit()
@@ -101,20 +115,52 @@ def procesar_enlace_youtube():
 
 
 @api_rutas.route('/videos', methods=['GET'])
+@login_required
 def listar_todos_los_videos():
     """
-    Devuelve la lista de todos los partidos que hemos analizado.
+    Devuelve la lista de los partidos DE ESTE USUARIO.
     """
-    partidos = Video.query.options(db.defer(Video.resultados)).all()
+    partidos = Video.query.filter_by(user_id=session['user_id']).options(db.defer(Video.resultados)).all()
     return jsonify(
         [p.a_diccionario(include_results=False) for p in partidos]
     ), 200
 
 
 @api_rutas.route('/videos/<int:id_video>', methods=['GET'])
+@login_required
 def ver_estado_partido(id_video):
     """
     Consulta cómo va el análisis de un partido concreto.
     """
     partido = Video.query.get_or_404(id_video)
+    
+    # Comprobamos seguridad
+    if partido.user_id != session['user_id']:
+        return jsonify({"error": "No tienes permiso para ver este video"}), 403
+
     return jsonify(partido.a_diccionario()), 200
+
+
+@api_rutas.route('/videos/<int:id_video>', methods=['DELETE'])
+@login_required
+def borrar_video(id_video):
+    """
+    Borra un video y sus archivos asociados.
+    """
+    partido = Video.query.get_or_404(id_video)
+    
+    # Comprobamos seguridad
+    if partido.user_id != session['user_id']:
+        return jsonify({"error": "No tienes permiso para borrar este video"}), 403
+
+    try:
+        # Borrar archivo físico si existe y es local
+        if partido.ruta_fichero and os.path.exists(partido.ruta_fichero):
+            os.remove(partido.ruta_fichero)
+        
+        db.session.delete(partido)
+        db.session.commit()
+        return jsonify({"mensaje": "Video eliminado correctamente"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": f"Error al borrar: {str(e)}"}), 500
