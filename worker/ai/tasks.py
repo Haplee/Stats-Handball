@@ -81,7 +81,7 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
 
         # 3. Tracking Real
         print("Empezando el tracking real...")
-        rutas_jugadores = seguidor_ia.trackear_partido(frames_generator)
+        rutas_jugadores, clases_ids = seguidor_ia.trackear_partido(frames_generator)
         update_video_progress(id_video, 85)
 
         # 4. Cocinamos métricas
@@ -110,9 +110,16 @@ def analizar_video_partido(id_video, nombre_archivo=None, url_youtube=None):
             dist_metros = dist_pixeles * 0.05 
             velocidad_max = (dist_metros / len(pasos)) * video_properties["fps"] * 3.6
             
+            # Determine name based on class
+            clase_obj = clases_ids.get(id_jugador, 0)
+            if clase_obj == 32:
+                nombre_obj = f"Balón #{id_jugador}"
+            else:
+                nombre_obj = f"Dorsal #{id_jugador}"
+
             stats_jugadores.append({
                 "id": str(id_jugador),
-                "name": f"Dorsal #{id_jugador}",
+                "name": nombre_obj,
                 "speed": f"{min(round(velocidad_max, 1), 32.5)} km/h",
                 "dist": f"{round(dist_metros/1000, 2)} km"
             })
