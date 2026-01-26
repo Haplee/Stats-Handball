@@ -1,4 +1,4 @@
-import { Terminal, Github, Code2 } from 'lucide-react';
+import { Terminal, Github } from 'lucide-react';
 
 function TechBadge({ name }: { name: string }) {
     return (

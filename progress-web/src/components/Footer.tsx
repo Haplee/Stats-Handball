@@ -1,4 +1,4 @@
-import { Github, Code2, Activity, Mail, Globe, Twitter, Instagram } from 'lucide-react';
+import { Github, Activity, Globe, Twitter, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {

@@ -8,7 +8,6 @@ import FeaturesPage from './pages/FeaturesPage';
 import RoadmapPage from './pages/RoadmapPage';
 import TechPage from './pages/TechPage';
 import WebsPage from './pages/WebsPage';
-import StatusGrid from './components/StatusGrid';
 
 export default function App() {
     return (

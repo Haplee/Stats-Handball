@@ -1,4 +1,3 @@
-
 import sys
 import unittest
 from unittest.mock import MagicMock
@@ -14,6 +13,7 @@ try:
 except ImportError:
     sys.path.append('.')
     from worker.ai.tracker import SeguidorIA
+
 
 class TestTracker(unittest.TestCase):
     def test_trackear_partido_tracks_objects(self):
@@ -40,31 +40,14 @@ class TestTracker(unittest.TestCase):
         # boxes.cls: [0, 32, 1]
         mock_results.boxes.cls.cpu().numpy.return_value = np.array([0, 32, 1])
 
-        # The track method returns a list of results (one per frame), here just 1 frame
+        # The track method returns a list of results (one per frame)
         tracker.modelo.track.return_value = [mock_results]
 
         # Dummy frames generator (list of 1 frame)
         frames = [np.zeros((100, 100, 3), dtype=np.uint8)]
 
-        # Call the method
-        # NOTE: This call will fail if the code is not yet updated to return tuple
-        try:
-            result = tracker.trackear_partido(frames)
-        except Exception as e:
-            # If it fails because of unpacking in the test (if I updated the test but not code),
-            # or logic error, we catch it.
-            # But here we expect to update the code to return a tuple.
-            # For TDD, this test is expected to fail or need adjustment if run against current code.
-            # But I will write the test expecting the NEW signature.
-            pass
+        result = tracker.trackear_partido(frames)
 
-        # Since I haven't updated the code yet, running this test NOW would fail if I expect a tuple.
-        # But I am writing the test file first.
-
-        # If the code returns just trayectorias (current state), result is a dict.
-        # If the code returns (trayectorias, classes), result is a tuple.
-
-        # I will assume the code IS updated when this runs successfully.
         if isinstance(result, tuple):
             trayectorias, clases = result
 
@@ -81,8 +64,10 @@ class TestTracker(unittest.TestCase):
             self.assertNotIn(12, clases)
 
         else:
-            # Code not updated yet?
-            self.fail("trackear_partido should return a tuple (trayectorias, clases)")
+            self.fail(
+                "trackear_partido should return a tuple (trayectorias, clases)"
+            )
+
 
 if __name__ == '__main__':
     unittest.main()
