@@ -2,7 +2,15 @@ import cv2
 from ultralytics import YOLO
 
 class DetectorIA:
-    def __init__(self, modelo_path='yolov8n.pt'):
+    def __init__(self, modelo_path='yolov8n.pt', clases_interes=None):
+        """
+        Inicializa el detector.
+
+        Args:
+            modelo_path (str): Ruta al modelo YOLO (puede ser .pt personalizado).
+            clases_interes (dict, optional): Diccionario mapeando ID de clase a etiqueta.
+                                             Por defecto usa clases COCO: {0: 'jugador', 32: 'balon'}.
+        """
         # Cargamos el modelo YOLOv8 (la versión nano es más rápida para procesar)
         self.modelo = YOLO(modelo_path)
 
@@ -27,7 +35,7 @@ class DetectorIA:
 
     def detectar_partido(self, frames):
         """
-        Analiza los frames del partido buscando jugadores, balón y árbitros.
+        Analiza los frames del partido buscando los objetos configurados en clases_interes.
         """
         todo_detecciones = []
         batch_size = 32
