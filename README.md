@@ -13,6 +13,7 @@ El objetivo principal de este TFG es desarrollar una solución completa y escala
 - **Detección y Seguimiento:** Identificación de jugadores, porteros y el balón a lo largo del vídeo.
 - **Generación de Métricas:** Cálculo de estadísticas como mapas de calor, velocidad de jugadores, efectividad de lanzamientos, etc.
 - **Visualización de Resultados:** Un panel de control intuitivo para mostrar los datos analizados.
+- **Gestión Integral:** Administración de Equipos, Base de Datos de Jugadores y Pizarra Táctica interactiva.
 
 ## 🏛️ Arquitectura
 
@@ -100,8 +101,10 @@ Sigue estos pasos para levantar el entorno de desarrollo local.
    ```
 
 4. **Accede a la aplicación:**
-   Una vez que todos los contenedores estén en funcionamiento, abre tu navegador y visita:
-   `http://localhost`
+   Una vez que todos los contenedores estén en funcionamiento, abre tu navegador:
+   
+   - **Landing & Documentación:** `http://localhost`
+   - **Aplicación (Panel de Control):** `http://localhost/app`
 
 ### Detener la aplicación
 Para detener todos los servicios, ejecuta:
@@ -112,41 +115,44 @@ docker compose down
 ## 📂 Estructura del Proyecto
 ```
 handball-ai-platform/
-├── docker-compose.yml        # Orquestación de servicios
-├── .env.example              # Plantilla de variables de entorno
-├── README.md                 # Este archivo
-├── docs/                     # Documentación adicional
-│   ├── architecture.md
-│   └── deployment.md
-├── nginx/                    # Configuración del proxy inverso
-│   ├── Dockerfile
-│   └── default.conf
-├── backend/                  # Servicio de la API (Flask)
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── app/
-├── worker/                   # Servicio de procesamiento (Celery)
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── ai/
-├── frontend/                 # Interfaz de usuario
-│   ├── Dockerfile
-│   ├── index.html
-│   └── app.js
-└── scripts/                  # Scripts útiles
-    └── init_db.sh
+├── client-app/               # Aplicación del Cliente (Dashboard, Equipos, Táctica)
+│   ├── src/pages/            # Dashboard, Teams, Players, Tactics, Settings...
+│   └── tests/                # Tests E2E y unitarios locales
+├── frontend/                 # Web Pública (Landing, Roadmap, Docs)
+├── backend/                  # API REST (Flask)
+├── worker/                   # Motor IA (Celery + YOLO)
+├── tests/                    # Infraestructura centralizada de Tests
+│   ├── run_tests.bat         # Script de ejecución automática
+│   ├── test_api.py           # Verificación de salud del Backend
+│   └── results/              # Logs de ejecuciones
+└── docker-compose.yml        # Orquestación global
 ```
 
-## 🛣️ Próximos Pasos
+## 🧪 Tests Unitarios y de Integración
 
-- [x] **Backend:** Implementar endpoints CRUD para usuarios y vídeos.
-- [x] **Backend:** Desarrollar la lógica de subida de archivos (Vinculada a Usuarios).
-- [x] **Backend:** Integrar Celery para la creación de tareas asíncronas.
-- [x] **Worker:** Implementar el pipeline de procesamiento de vídeo (descarga, análisis, guardado).
-- [x] **Worker:** Integrar un modelo de detección de objetos (YOLO).
-- [x] **Frontend:** Dashboard interactivo, subida de archivos/YouTube y gestión de biblioteca (Implementado).
-- [x] **Frontend:** Dashboard interactivo, subida de archivos/YouTube y gestión de biblioteca (Implementado).
-- [x] **Base de Datos:** Definir los modelos de datos con SQLAlchemy.
-- [x] **Seguridad:** Autenticación estricta por Sesión/Cookies implementada.
-- [x] **QA:** Suite de tests unitarios verificado para Backend y Worker.
-- [ ] **CI/CD:** Configurar un pipeline de integración y despliegue continuo.
+El proyecto cuenta con una suite de pruebas automatizada para validar tanto la compilación del frontend como la disponibilidad del backend.
+
+Para ejecutar la suite completa:
+
+1. Asegúrate de que los contenedores Docker estén corriendo.
+2. Ejecuta el script `tests/run_tests.bat` (Windows).
+3. Revisa los resultados en la carpeta `tests/results/`.
+
+```cmd
+.\tests\run_tests.bat
+```
+
+## 🛣️ Próximos Pasos (Hoja de Ruta)
+
+- [x] **Backend:** API REST segura con autenticación y gestión de archivos.
+- [x] **Worker:** Pipeline de IA asíncrono (YOLO + Celery) para procesamiento de vídeo.
+- [x] **Frontend:** Web pública de progreso separada de la aplicación principal.
+- [x] **Client App:** Suite de aplicaciones completa:
+    - [x] **Dashboard:** Subida de vídeos (Local/YouTube) y gestión de librería.
+    - [x] **Teams:** Gestión de plantillas y equipos.
+    - [x] **Players:** Base de datos de jugadores con estadísticas.
+    - [x] **Tactics:** Pizarra táctica interactiva.
+    - [x] **Settings:** Configuración de usuario.
+- [x] **QA:** Infraestructura de pruebas automatizada (`tests/run_tests.bat`).
+- [ ] **IA Avanzada:** Reconocimiento de acciones complejas (pases, fintas).
+- [ ] **CI/CD:** Pipeline de despliegue automatizado.

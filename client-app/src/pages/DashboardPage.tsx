@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Youtube, Play, Loader2, FileVideo, Clock, CheckCircle2, AlertCircle, Trash2 } from 'lucide-react';
+import { StatusBadge } from '../components/StatusBadge';
 
 interface Video {
     id: number;
@@ -300,15 +301,4 @@ export default function DashboardPage() {
     );
 }
 
-function StatusBadge({ status }: { status: string }) {
-    switch (status) {
-        case 'completed':
-            return <span className="text-green-400 bg-green-500/10 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-green-500/20">Completado</span>;
-        case 'processing':
-            return <span className="text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-blue-500/20">Procesando</span>;
-        case 'failed':
-            return <span className="text-red-400 bg-red-500/10 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-red-500/20">Fallido</span>;
-        default:
-            return <span className="text-gray-400 bg-gray-500/10 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-gray-500/20">Pendiente</span>;
-    }
-}
+

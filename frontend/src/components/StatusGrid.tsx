@@ -50,17 +50,17 @@ export default function StatusGrid() {
             >
                 <StatusCard
                     icon={<Video className="text-purple-400" />}
-                    title="Pipeline de Visión (CV)"
+                    title="Infraestructura QA"
                     status="100%"
                     color="bg-purple-500"
-                    desc="Integración estable de YOLOv8. Detección y seguimiento de jugadores funciona correctamente."
+                    desc="Sistema de tests automatizados para validar backend, frontend y compilación."
                 />
                 <StatusCard
                     icon={<LayoutDashboard className="text-blue-400" />}
-                    title="Frontend UX"
-                    status="95%"
+                    title="Client App Suite"
+                    status="100%"
                     color="bg-blue-500"
-                    desc="Dashboard Interactivo y carga de vídeos (Local/YouTube) operativos."
+                    desc="Gestión de Equipos, Jugadores, Pizarra Táctica y Análisis de Video integrados."
                 />
                 <StatusCard
                     icon={<Server className="text-emerald-400" />}

@@ -19,10 +19,10 @@ export default function Home() {
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-900/20 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 shadow-glow"
                     >
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                         </span>
-                        v0.3.0 • Lanzamiento Beta
+                        v0.4.0 • Suite Completa
                     </motion.div>
 
                     <motion.h1
@@ -31,8 +31,8 @@ export default function Home() {
                         transition={{ duration: 0.7, ease: "easeOut" }}
                         className="text-5xl md:text-7xl font-bold tracking-tight mb-8 bg-gradient-to-b from-white via-white to-white/50 bg-clip-text text-transparent"
                     >
-                        Nueva Generación de <br />
-                        <span className="text-blue-500">Inteligencia en Video</span>
+                        Plataforma Integral de <br />
+                        <span className="text-blue-500">Análisis Deportivo</span>
                     </motion.h1>
 
                     <motion.p
@@ -41,8 +41,8 @@ export default function Home() {
                         transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
                         className="text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
-                        Transforma grabaciones de partidos en análisis profesionales.
-                        Seguimiento en tiempo real, detección de eventos y tácticas impulsadas por Visión Artificial.
+                        Desde la gestión de equipos hasta el análisis táctico avanzado.
+                        Una suite completa potenciada por IA para entrenadores modernos.
                     </motion.p>
 
                     <motion.div
