@@ -53,6 +53,11 @@ services:
     networks:
       - app-network
 
+  client-app:
+    build: ./client-app
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge

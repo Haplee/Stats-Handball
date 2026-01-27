@@ -19,12 +19,8 @@ export default function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex gap-8 text-sm font-medium">
-                    <Link to="/" className={`${isActive('/')} transition-colors`}>Inicio</Link>
-                    <a href="/app/" className="text-gray-400 hover:text-white transition-colors">Panel App</a>
-                    <Link to="/features" className={`${isActive('/features')} transition-colors`}>Funciones</Link>
-                    <Link to="/roadmap" className={`${isActive('/roadmap')} transition-colors`}>Hoja de Ruta</Link>
-                    <Link to="/tech" className={`${isActive('/tech')} transition-colors`}>Tecnología</Link>
-                    <Link to="/webs" className={`${isActive('/webs')} transition-colors`}>Webs</Link>
+                    <a href="/" className="text-gray-400 hover:text-white transition-colors">← Progreso</a>
+                    <Link to="/" className={`${isActive('/')} transition-colors`}>Panel de Control</Link>
                 </div>
 
                 <div className="hidden md:flex gap-4">
@@ -49,12 +45,8 @@ export default function Navbar() {
                         className="md:hidden bg-[#0a0a0a] border-b border-white/5 overflow-hidden"
                     >
                         <div className="flex flex-col p-6 gap-4 text-gray-400 font-medium">
-                            <Link to="/" onClick={() => setIsOpen(false)}>Inicio</Link>
-                            <a href="/app/" onClick={() => setIsOpen(false)}>Panel App</a>
-                            <Link to="/features" onClick={() => setIsOpen(false)}>Funciones</Link>
-                            <Link to="/roadmap" onClick={() => setIsOpen(false)}>Hoja de Ruta</Link>
-                            <Link to="/tech" onClick={() => setIsOpen(false)}>Tecnología</Link>
-                            <Link to="/webs" onClick={() => setIsOpen(false)}>Webs</Link>
+                            <a href="/" onClick={() => setIsOpen(false)}>← Volver al Progreso</a>
+                            <Link to="/" onClick={() => setIsOpen(false)}>Panel de Control</Link>
                         </div>
                     </motion.div>
                 )}

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Documentación YOLOv8",
+        "url": "https://docs.ultralytics.com/",
+        "category": "IA & Visión",
+        "description": "Referencia principal para el entrenamiento del modelo de detección de balones."
+    },
+    {
+        "id": 2,
+        "title": "Documentación React",
+        "url": "https://react.dev/",
+        "category": "Frontend",
+        "description": "Recursos oficiales para la construcción de la interfaz de usuario."
+    },
+    {
+        "id": 3,
+        "title": "Vercel",
+        "url": "https://vercel.com/",
+        "category": "Despliegue",
+        "description": "Plataforma utilizada para alojar esta web de progreso."
+    },
+    {
+        "id": 4,
+        "title": "Flask Documentation",
+        "url": "https://flask.palletsprojects.com/",
+        "category": "Backend",
+        "description": "Framework utilizado para el desarrollo de la API REST."
+    },
+    {
+        "id": 5,
+        "title": "Celery Project",
+        "url": "https://docs.celeryq.dev/",
+        "category": "Backend",
+        "description": "Gestor de colas de tareas distribuido para el procesamiento de vídeo."
+    },
+    {
+        "id": 6,
+        "title": "Redis",
+        "url": "https://redis.io/docs/",
+        "category": "Backend",
+        "description": "Broker de mensajes utilizado por Celery."
+    }
+]
