@@ -20,6 +20,7 @@ export default function Navbar() {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex gap-8 text-sm font-medium">
                     <Link to="/" className={`${isActive('/')} transition-colors`}>Inicio</Link>
+                    <Link to="/dashboard" className={`${isActive('/dashboard')} transition-colors`}>Panel</Link>
                     <Link to="/features" className={`${isActive('/features')} transition-colors`}>Funciones</Link>
                     <Link to="/roadmap" className={`${isActive('/roadmap')} transition-colors`}>Hoja de Ruta</Link>
                     <Link to="/tech" className={`${isActive('/tech')} transition-colors`}>Tecnología</Link>
@@ -49,6 +50,7 @@ export default function Navbar() {
                     >
                         <div className="flex flex-col p-6 gap-4 text-gray-400 font-medium">
                             <Link to="/" onClick={() => setIsOpen(false)}>Inicio</Link>
+                            <Link to="/dashboard" onClick={() => setIsOpen(false)}>Panel</Link>
                             <Link to="/features" onClick={() => setIsOpen(false)}>Funciones</Link>
                             <Link to="/roadmap" onClick={() => setIsOpen(false)}>Hoja de Ruta</Link>
                             <Link to="/tech" onClick={() => setIsOpen(false)}>Tecnología</Link>
