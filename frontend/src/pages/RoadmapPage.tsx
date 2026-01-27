@@ -54,7 +54,7 @@ export default function RoadmapPage() {
                     done
                     date="Feb 2026"
                     title="Lanzamiento Beta (MVP)"
-                    desc="Frontend conectado (Dashboard de subida y análisis). Implementación de subida de vídeos (Archivo/YouTube) y visualización de biblioteca."
+                    desc="COMPLETADO. 1) Frontend: Dashboard con subida de archivos/YouTube y gestión de biblioteca. 2) Worker: Pipeline completo de procesamiento de vídeo. 3) IA: Integración de modelo YOLOv8 para detección en partidos."
                 />
                 <TimelineItem
                     date="Mar 2026"
