@@ -34,10 +34,12 @@ export default function TechPage() {
                     <TechBadge name="Tailwind v4" />
                     <TechBadge name="Framer Motion" />
                     <TechBadge name="Python 3.11" />
-                    <TechBadge name="FastAPI" />
+                    <TechBadge name="Flask" />
                     <TechBadge name="YOLOv8" />
                     <TechBadge name="OpenCV" />
                     <TechBadge name="PostgreSQL" />
+                    <TechBadge name="Celery" />
+                    <TechBadge name="Redis" />
                     <TechBadge name="Docker" />
                     <TechBadge name="FFmpeg" />
                 </div>

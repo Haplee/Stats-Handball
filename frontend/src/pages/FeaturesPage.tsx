@@ -4,8 +4,8 @@ import { Target, ScanLine, BarChart3, Users, Zap, ShieldCheck } from 'lucide-rea
 const features = [
     {
         icon: <Target className="text-blue-400" size={32} />,
-        title: "Seguimiento de Balón",
-        desc: "Tracking preciso de la trayectoria del balón usando modelos YOLOv8 personalizados y ajustados para la velocidad del balonmano."
+        title: "Seguimiento de Balón (YOLOv8)",
+        desc: "Tracking preciso de la trayectoria del balón usando modelos YOLOv8 entrenados específicamente para balonmano. Integrado y operativo."
     },
     {
         icon: <Users className="text-purple-400" size={32} />,
@@ -24,8 +24,8 @@ const features = [
     },
     {
         icon: <Zap className="text-yellow-400" size={32} />,
-        title: "Procesamiento en Tiempo Real",
-        desc: "Pipeline de inferencia optimizado capaz de procesar partidos con latencia mínima usando aceleración TensorRT."
+        title: "Procesamiento Asíncrono",
+        desc: "Sistema de colas (Celery/Redis) que permite la subida y análisis de videos en segundo plano sin interrumpir la experiencia de usuario."
     },
     {
         icon: <ShieldCheck className="text-cyan-400" size={32} />,
