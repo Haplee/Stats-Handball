@@ -3,9 +3,19 @@ import unittest
 from unittest.mock import MagicMock
 import numpy as np
 
-# Mock dependencies
-sys.modules['ultralytics'] = MagicMock()
-sys.modules['cv2'] = MagicMock()
+# Mock dependencies safely
+from unittest.mock import MagicMock
+import sys
+
+def mock_if_missing(name):
+    if name not in sys.modules:
+        try:
+            __import__(name)
+        except ImportError:
+            sys.modules[name] = MagicMock()
+
+for m in ['ultralytics', 'cv2']:
+    mock_if_missing(m)
 
 # Now import the module under test
 try:
@@ -13,6 +23,8 @@ try:
 except ImportError:
     sys.path.append('.')
     from worker.ai.tracker import SeguidorIA
+
+
 
 
 class TestTracker(unittest.TestCase):

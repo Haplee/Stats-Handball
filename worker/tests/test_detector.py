@@ -2,9 +2,19 @@ import sys
 import unittest
 from unittest.mock import MagicMock, patch
 
-# Mock dependencies globally to avoid import errors
-sys.modules['cv2'] = MagicMock()
-sys.modules['ultralytics'] = MagicMock()
+# Mock dependencies safely
+from unittest.mock import MagicMock
+import sys
+
+def mock_if_missing(name):
+    if name not in sys.modules:
+        try:
+            __import__(name)
+        except ImportError:
+            sys.modules[name] = MagicMock()
+
+for m in ['cv2', 'ultralytics']:
+    mock_if_missing(m)
 
 # Import the module under test
 try:
@@ -12,6 +22,8 @@ try:
 except ImportError:
     sys.path.append('.')
     from worker.ai.detector import DetectorIA
+
+
 
 
 class TestDetectorIA(unittest.TestCase):

@@ -3,20 +3,27 @@ import unittest
 from unittest.mock import MagicMock
 import numpy as np
 
-# Mock dependencies to avoid import errors or side effects
-sys.modules['celery'] = MagicMock()
-sys.modules['cv2'] = MagicMock()
-sys.modules['ultralytics'] = MagicMock()
-sys.modules['yt_dlp'] = MagicMock()
-sys.modules['worker.ai.video'] = MagicMock()
-sys.modules['worker.ai.database'] = MagicMock()
+# Mock dependencies safely
+from unittest.mock import MagicMock
+import sys
+
+def mock_if_missing(name):
+    if name not in sys.modules:
+        try:
+            __import__(name)
+        except ImportError:
+            sys.modules[name] = MagicMock()
+
+for m in ['celery', 'cv2', 'ultralytics', 'yt_dlp', 'worker.ai.video', 'worker.ai.database']:
+    mock_if_missing(m)
 
 try:
     from worker.ai import tasks
 except ImportError:
-    # If running from inside worker dir, add . to path
     sys.path.append('.')
     from worker.ai import tasks
+
+
 
 
 class TestDistanceCalculation(unittest.TestCase):
