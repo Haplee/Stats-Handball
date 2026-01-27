@@ -139,12 +139,13 @@ handball-ai-platform/
 
 ## 🛣️ Próximos Pasos
 
-- [ ] **Backend:** Implementar endpoints CRUD para usuarios y vídeos.
-- [ ] **Backend:** Desarrollar la lógica de subida de archivos.
-- [ ] **Backend:** Integrar Celery para la creación de tareas asíncronas.
-- [ ] **Worker:** Implementar el pipeline de procesamiento de vídeo (descarga, análisis, guardado).
-- [ ] **Worker:** Integrar un modelo de detección de objetos (YOLO).
-- [ ] **Frontend:** Desarrollar la interfaz para subir vídeos y ver resultados.
-- [ ] **Base de Datos:** Definir los modelos de datos con SQLAlchemy.
-- [ ] **Seguridad:** Añadir autenticación JWT.
+- [x] **Backend:** Implementar endpoints CRUD para usuarios y vídeos.
+- [x] **Backend:** Desarrollar la lógica de subida de archivos (Vinculada a Usuarios).
+- [x] **Backend:** Integrar Celery para la creación de tareas asíncronas.
+- [x] **Worker:** Implementar el pipeline de procesamiento de vídeo (descarga, análisis, guardado).
+- [x] **Worker:** Integrar un modelo de detección de objetos (YOLO).
+- [x] **Frontend:** Desarrollar la interfaz para subir vídeos y ver resultados (En progreso).
+- [x] **Base de Datos:** Definir los modelos de datos con SQLAlchemy.
+- [x] **Seguridad:** Autenticación estricta por Sesión/Cookies implementada.
+- [x] **QA:** Suite de tests unitarios verificado para Backend y Worker.
 - [ ] **CI/CD:** Configurar un pipeline de integración y despliegue continuo.
