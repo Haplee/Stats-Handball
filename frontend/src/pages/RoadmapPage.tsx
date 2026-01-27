@@ -51,10 +51,10 @@ export default function RoadmapPage() {
                     desc="API REST segura implementada (Auth, CRUD, Videos). Pipeline de procesamiento asíncrono (Celery/Redis) integrado y validado con tests unitarios."
                 />
                 <TimelineItem
-                    active
+                    done
                     date="Feb 2026"
                     title="Lanzamiento Beta (MVP)"
-                    desc="Conectando el frontend con la API real. Preparando el despliegue para subida de vídeos y visualización de estadísticas en tiempo real."
+                    desc="Frontend conectado (Dashboard de subida y análisis). Implementación de subida de vídeos (Archivo/YouTube) y visualización de biblioteca."
                 />
                 <TimelineItem
                     date="Mar 2026"
