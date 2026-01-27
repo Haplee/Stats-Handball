@@ -29,7 +29,8 @@ def register():
         username=data['username'],
         email=data['email'],
         full_name=data.get('full_name', ''),
-        role=data.get('role', 'user')
+        # Security: Force role to 'user' to prevent privilege escalation
+        role='user'
     )
     new_user.set_password(data['password'])
 
