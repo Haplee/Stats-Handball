@@ -8,6 +8,7 @@ import FeaturesPage from './pages/FeaturesPage';
 import RoadmapPage from './pages/RoadmapPage';
 import TechPage from './pages/TechPage';
 import WebsPage from './pages/WebsPage';
+import StatsPage from './pages/StatsPage';
 
 export default function App() {
     return (
@@ -19,6 +20,7 @@ export default function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/features" element={<FeaturesPage />} />
                         <Route path="/roadmap" element={<RoadmapPage />} />
+                        <Route path="/stats" element={<StatsPage />} />
                         <Route path="/tech" element={<TechPage />} />
                         <Route path="/webs" element={<WebsPage />} />
                     </Routes>

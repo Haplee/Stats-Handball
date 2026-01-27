@@ -3,9 +3,11 @@ from .config import Config
 from .extensions import db, migrate
 from .routes.api import api_rutas
 from .routes.auth import auth_routes
+from .routes.teams import teams_bp
+from .routes.players import players_bp
+from .routes.tactics import tactics_bp
 from .celery_utils import make_celery
-from .models.video import Video
-from .models.user import User
+from .models import Video, User, Team, Player, Tactic
 import os
 
 def crear_app(config_class=Config):
@@ -35,6 +37,9 @@ def crear_app(config_class=Config):
     # Registramos las rutas de nuestra API
     app.register_blueprint(api_rutas, url_prefix='/api')
     app.register_blueprint(auth_routes, url_prefix='/api/auth')
+    app.register_blueprint(teams_bp, url_prefix='/api/teams')
+    app.register_blueprint(players_bp, url_prefix='/api/players')
+    app.register_blueprint(tactics_bp, url_prefix='/api/tactics')
 
     # Un pequeño test para ver si el servidor responde
     @app.route('/health')
@@ -42,9 +47,16 @@ def crear_app(config_class=Config):
         return jsonify({"estado": "funcionando", "servidor": "ok"}), 200
 
     # Nos aseguramos de que la carpeta de subidas esté lista
+    # También creamos las carpetas para imágenes estáticas
     ruta_subidas = app.config['UPLOAD_FOLDER']
-    if not os.path.exists(ruta_subidas):
-        os.makedirs(ruta_subidas)
+    static_images = os.path.join(app.root_path, 'static', 'images')
+    
+    for path in [ruta_subidas, 
+                 os.path.join(static_images, 'teams'),
+                 os.path.join(static_images, 'players'),
+                 os.path.join(static_images, 'tactics')]:
+        if not os.path.exists(path):
+            os.makedirs(path)
 
     # Crear las tablas de la base de datos si no existen
     with app.app_context():

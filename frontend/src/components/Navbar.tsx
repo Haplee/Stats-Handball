@@ -23,6 +23,7 @@ export default function Navbar() {
                     <a href="/app/" className="text-gray-400 hover:text-white transition-colors">Panel App</a>
                     <Link to="/features" className={`${isActive('/features')} transition-colors`}>Funciones</Link>
                     <Link to="/roadmap" className={`${isActive('/roadmap')} transition-colors`}>Hoja de Ruta</Link>
+                    <Link to="/stats" className={`${isActive('/stats')} transition-colors`}>Métricas</Link>
                     <Link to="/tech" className={`${isActive('/tech')} transition-colors`}>Tecnología</Link>
                     <Link to="/webs" className={`${isActive('/webs')} transition-colors`}>Webs</Link>
                 </div>
@@ -53,6 +54,7 @@ export default function Navbar() {
                             <a href="/app/" onClick={() => setIsOpen(false)}>Panel App</a>
                             <Link to="/features" onClick={() => setIsOpen(false)}>Funciones</Link>
                             <Link to="/roadmap" onClick={() => setIsOpen(false)}>Hoja de Ruta</Link>
+                            <Link to="/stats" onClick={() => setIsOpen(false)}>Métricas</Link>
                             <Link to="/tech" onClick={() => setIsOpen(false)}>Tecnología</Link>
                             <Link to="/webs" onClick={() => setIsOpen(false)}>Webs</Link>
                         </div>

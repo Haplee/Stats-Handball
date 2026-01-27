@@ -40,26 +40,37 @@ export default function RoadmapPage() {
                 />
                 <TimelineItem
                     done
-                    date="Nov 2025"
-                    title="Prototipo de Motor 1.0"
-                    desc="Primer rastreo exitoso de balón y jugadores en entornos controlados. Visualizador básico construido con OpenCV."
+                    date="Nov - Dic 2025"
+                    title="Prototipo de Motor & Datos"
+                    desc="Primer rastreo exitoso de balón y jugadores. Adquisición de datasets del Mundial de Balonmano para entrenamiento. Visualizador básico construido con OpenCV."
                 />
                 <TimelineItem
                     done
                     date="Ene 2026"
-                    title="Backend & Core IA Completado"
-                    desc="API REST segura implementada (Auth, CRUD, Videos). Pipeline de procesamiento asíncrono (Celery/Redis) integrado y validado con tests unitarios."
+                    title="Arquitectura Backend & API"
+                    desc="Estructura de microservicios establecida. API REST segura (Auth, CRUD). Pipeline asíncrono robusto implementado con Celery y Redis para procesamiento pesado."
                 />
                 <TimelineItem
                     done
                     date="Feb 2026"
-                    title="Lanzamiento Beta (MVP)"
-                    desc="COMPLETADO. 1) Suite completa (Client App): Dashboard, Gestión de Equipos, Base de Datos de Jugadores y Pizarra Táctica. 2) Infraestructura de Pruebas: Scripts automatizados de validación. 3) Backend & AI: Pipeline robusto de procesamiento."
+                    title="Lanzamiento Beta (MVP Complete)"
+                    desc="Suite completa operativa: Dashboard interactivo, Gestión de Equipos (CRUD completo con escudos), Base de Datos de Jugadores filtrable y Pizarra Táctica Profesional con exportación e imágenes del campo reales."
                 />
                 <TimelineItem
+                    active
                     date="Mar 2026"
-                    title="Analítica Avanzada"
-                    desc="Implementación de reconocimiento de eventos complejos (Cadenas de Pases, Formaciones Defensivas) y exportación (PDF/Excel)."
+                    title="Analítica Avanzada & Eventos"
+                    desc="Implementación de lógica para reconocer Cadenas de Pases, Formaciones Defensivas y mapas de calor precisos. Exportación de informes tácticos en PDF/Excel."
+                />
+                <TimelineItem
+                    date="Abr 2026"
+                    title="App Móvil & Tiempo Real"
+                    desc="Desarrollo de versión PWA optimizada para pie de campo. Integración de streaming en tiempo real para análisis durante partidos en vivo."
+                />
+                <TimelineItem
+                    date="Futuro"
+                    title="IA Predictiva"
+                    desc="Modelado de probabilidades de éxito basado en posiciones históricas y sugerencias tácticas automáticas asistidas por IA."
                 />
             </div>
         </section>

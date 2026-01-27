@@ -4,33 +4,33 @@ import { Target, ScanLine, BarChart3, Users, Zap, ShieldCheck } from 'lucide-rea
 const features = [
     {
         icon: <Target className="text-blue-400" size={32} />,
-        title: "Seguimiento de Balón (YOLOv8)",
-        desc: "Tracking preciso de la trayectoria del balón usando modelos YOLOv8 entrenados específicamente para balonmano. Integrado y operativo."
+        title: "Seguimiento YOLOv11 & v8",
+        desc: "Implementación de modelos SOTA (State Of The Art) optimizados para el seguimiento de balón y jugadores en canchas de balonmano con oclusión dinámica."
     },
     {
         icon: <Users className="text-purple-400" size={32} />,
-        title: "Reconocimiento Inteligente",
-        desc: "Sistema de filtrado verificado que distingue exclusivamente jugadores y balón, ignorando árbitros, público y elementos externos para estadísticas limpias."
+        title: "Gestión de Plantillas",
+        desc: "Panel administrativo integral para la gestión de equipos, perfiles técnicos y bases de datos de jugadores con estadísticas físicas y de rendimiento."
     },
     {
         icon: <BarChart3 className="text-emerald-400" size={32} />,
-        title: "Analítica Táctica",
-        desc: "Generación automática de mapas de calor, redes de pases y gráficos de tiro a partir de datos posicionales."
+        title: "Visualización Táctica",
+        desc: "Conversión de coordenadas de píxeles a espacio de cancha real 40x20m para la generación automática de mapas de calor y trayectorias."
     },
     {
         icon: <ScanLine className="text-orange-400" size={32} />,
-        title: "Detección de Eventos",
-        desc: "Registro automático de eventos clave: Goles, Tiros, Pases y Pérdidas mapeados a marcas de tiempo específicas."
+        title: "Detección de Eventos IA",
+        desc: "Reconocimiento automático de marcas de tiempo críticas: goles, tiros a portería y eficacia de lanzamiento mediante clasificación de acciones."
     },
     {
         icon: <Zap className="text-yellow-400" size={32} />,
-        title: "Procesamiento Asíncrono",
-        desc: "Sistema de colas (Celery/Redis) que permite la subida y análisis de videos en segundo plano sin interrumpir la experiencia de usuario."
+        title: "Arquitectura Escalable",
+        desc: "Infraestructura basada en contenedores con colas de procesamiento Celery/Redis, garantizando una respuesta asíncrona fluida ante cargas pesadas."
     },
     {
         icon: <ShieldCheck className="text-cyan-400" size={32} />,
-        title: "Almacenamiento Seguro",
-        desc: "Almacenamiento encriptado para videos de equipos y datos tácticos propietarios con control de acceso por roles."
+        title: "Pizarra Táctica Pro",
+        desc: "Herramienta de dibujo profesional integrada con gráficos vectoriales para la planificación de jugadas y exportación instantánea en alta resolución."
     }
 ];
 

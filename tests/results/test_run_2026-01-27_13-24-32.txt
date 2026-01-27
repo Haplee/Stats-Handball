@@ -1,0 +1,37 @@
+=== Starting Test Suite at 2026-01-27_13-24-32 === 
+Project Root: C:\Users\franc\proyecto\Stats-Handball\tests\.. 
+ 
+[1/3] Testing Frontend Build (Client App)... 
+
+> handball-stats-app@0.3.0 build
+> tsc -b && vite build
+
+src/pages/PlayersPage.tsx(122,17): error TS6133: 'res' is declared but its value is never read.
+src/pages/TacticsPage.tsx(2,63): error TS6133: 'RotateCcw' is declared but its value is never read.
+src/pages/TeamsPage.tsx(3,23): error TS6133: 'MoreVertical' is declared but its value is never read.
+src/pages/TeamsPage.tsx(3,45): error TS6133: 'Calendar' is declared but its value is never read.
+[FAILURE] Client App Build Failed. 
+ 
+[2/3] Testing Frontend Build (Progress Web)... 
+
+> handball-stats-progress@0.3.0 build
+> tsc -b && vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 1919 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  2.38 kB[22m[1m[22m[2m │ gzip:  0.83 kB[22m
+[2mdist/[22m[35massets/index-CayuQgkI.css  [39m[1m[2m 30.13 kB[22m[1m[22m[2m │ gzip:  5.94 kB[22m
+[2mdist/[22m[36massets/index-Cy0iy9l9.js   [39m[1m[2m308.05 kB[22m[1m[22m[2m │ gzip: 98.35 kB[22m
+[32m✓ built in 2.56s[39m
+[SUCCESS] Progress Web Build Passed. 
+ 
+[3/3] Testing Backend API Availability... 
+Traceback (most recent call last):
+  File "C:\Users\franc\proyecto\Stats-Handball\tests\test_api.py", line 1, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+[FAILURE] Backend API Tests Failed. 
+=== Test Run Complete === 
