@@ -145,6 +145,7 @@ handball-ai-platform/
 - [x] **Worker:** Implementar el pipeline de procesamiento de vídeo (descarga, análisis, guardado).
 - [x] **Worker:** Integrar un modelo de detección de objetos (YOLO).
 - [x] **Frontend:** Dashboard interactivo, subida de archivos/YouTube y gestión de biblioteca (Implementado).
+- [x] **Frontend:** Dashboard interactivo, subida de archivos/YouTube y gestión de biblioteca (Implementado).
 - [x] **Base de Datos:** Definir los modelos de datos con SQLAlchemy.
 - [x] **Seguridad:** Autenticación estricta por Sesión/Cookies implementada.
 - [x] **QA:** Suite de tests unitarios verificado para Backend y Worker.
