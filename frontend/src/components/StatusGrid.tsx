@@ -51,23 +51,23 @@ export default function StatusGrid() {
                 <StatusCard
                     icon={<Video className="text-purple-400" />}
                     title="Pipeline de Visión (CV)"
-                    status="92%"
+                    status="100%"
                     color="bg-purple-500"
-                    desc="Integración estable de YOLOv8 + ByteTrack. Optimizando el manejo de oclusiones."
+                    desc="Integración estable de YOLOv8. Detección y seguimiento de jugadores funciona correctamente."
                 />
                 <StatusCard
                     icon={<LayoutDashboard className="text-blue-400" />}
                     title="Frontend UX"
-                    status="85%"
+                    status="95%"
                     color="bg-blue-500"
-                    desc="Dashboard y subida de videos completada. Implementando controles de reproducción."
+                    desc="Dashboard Interactivo y carga de vídeos (Local/YouTube) operativos."
                 />
                 <StatusCard
                     icon={<Server className="text-emerald-400" />}
                     title="Servicios API"
-                    status="98%"
+                    status="100%"
                     color="bg-emerald-500"
-                    desc="Backend FastAPI totalmente desacoplado y dockerizado."
+                    desc="Backend, Worker y Base de Datos totalmente integrados y funcionales."
                 />
             </motion.div>
         </section>

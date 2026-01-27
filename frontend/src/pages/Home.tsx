@@ -22,7 +22,7 @@ export default function Home() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
-                        v0.2.0 • Optimización del Motor
+                        v0.3.0 • Lanzamiento Beta
                     </motion.div>
 
                     <motion.h1
