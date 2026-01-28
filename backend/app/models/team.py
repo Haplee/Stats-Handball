@@ -2,21 +2,21 @@ from datetime import datetime
 from app.extensions import db
 
 class Team(db.Model):
-    __tablename__ = 'teams'
+    __tablename__ = 'equipos'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    category = db.Column(db.String(50))
-    coach_name = db.Column(db.String(100))
-    logo_path = db.Column(db.String(255)) # Path to uploaded image
+    name = db.Column(db.String(100), nullable=False, name='nombre')
+    category = db.Column(db.String(50), name='categoria')
+    coach_name = db.Column(db.String(100), name='nombre_entrenador')
+    logo_path = db.Column(db.String(255), name='ruta_logo') # Ruta a la imagen subida
     
-    # Stats stored as JSON (e.g., {"wins": 10, "losses": 2})
-    stats = db.Column(db.JSON, default={})
+    # Estadísticas guardadas como JSON (ej: {"victorias": 10, "derrotas": 2})
+    stats = db.Column(db.JSON, default={}, name='estadisticas')
     
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, name='creado_el')
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, name='actualizado_el')
 
-    # Key relationship: A team has many players
+    # Relación Clave: Un equipo tiene muchos jugadores
     players = db.relationship('Player', backref='team', lazy=True, cascade="all, delete-orphan")
 
     def to_dict(self):

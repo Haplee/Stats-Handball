@@ -9,36 +9,36 @@ class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     # Datos del archivo físico
-    nombre_fichero = db.Column(db.String(255), nullable=True, name='filename')
-    ruta_fichero = db.Column(db.String(255), nullable=True, name='filepath')
+    nombre_fichero = db.Column(db.String(255), nullable=True) # Coincide con col 'nombre_fichero'
+    ruta_fichero = db.Column(db.String(255), nullable=True)   # Coincide con col 'ruta_fichero'
 
     # Relación con el usuario propietario
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, name='usuario_id')
 
     # Enlace de youtube si el vídeo viene de fuera
     enlace_youtube = db.Column(
-        db.String(500), nullable=True, name='youtube_url'
+        db.String(500), nullable=True, name='url_youtube'
     )
 
     # Estado del procesamiento (pendiente, procesando, completado, fallido)
     estado = db.Column(
-        db.String(50), default='pending', nullable=False, name='status'
+        db.String(50), default='pending', nullable=False
     )
 
     # Progreso de 0 a 100
-    progreso = db.Column(db.Integer, default=0, name='progress')
+    progreso = db.Column(db.Integer, default=0)
 
     # Aquí es donde guardamos todo el chorreo de datos de la IA
     # (jugadores, velocidades, etc)
-    resultados = db.Column(db.JSON, nullable=True, name='results')
+    resultados = db.Column(db.JSON, nullable=True)
 
     # Fechas para tenerlo todo controlado
     creado_el = db.Column(
-        db.DateTime, default=datetime.datetime.utcnow, name='created_at'
+        db.DateTime, default=datetime.datetime.utcnow
     )
     actualizado_el = db.Column(
         db.DateTime, default=datetime.datetime.utcnow,
-        onupdate=datetime.datetime.utcnow, name='updated_at'
+        onupdate=datetime.datetime.utcnow
     )
 
     def a_diccionario(self, include_results=True):

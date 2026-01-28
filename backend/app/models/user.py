@@ -4,20 +4,20 @@ import datetime
 
 class User(db.Model):
     """Modelo de usuario para el sistema de autenticación"""
-    __tablename__ = 'users'
+    __tablename__ = 'usuarios'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False, name='nombre_usuario')
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     
     # Información adicional
-    full_name = db.Column(db.String(120), nullable=True)
-    role = db.Column(db.String(20), default='user')  # 'user', 'coach', 'admin'
+    full_name = db.Column(db.String(120), nullable=True, name='nombre_completo')
+    role = db.Column(db.String(20), default='user', name='rol')  # 'user', 'coach', 'admin'
     
-    # Timestamps
-    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    last_login = db.Column(db.DateTime, nullable=True)
+    # Marcas de tiempo (Timestamps)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, name='creado_el')
+    last_login = db.Column(db.DateTime, nullable=True, name='ultimo_login')
 
     def set_password(self, password):
         """Hashea la contraseña antes de guardarla"""
@@ -40,4 +40,4 @@ class User(db.Model):
         }
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<Usuario {self.username}>'
